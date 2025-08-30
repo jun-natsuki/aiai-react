@@ -199,155 +199,155 @@
     <!-- AUTH -->
     <section id="auth" style="display:none">
       <div id="loginBox" class="card">
-        <h2 style="margin-top:0">로그인</h2>
-        <div class="input-row"><label>이메일</label><input id="li_email" type="email"></div>
-        <div class="input-row"><label>비밀번호</label><input id="li_pw" type="password"></div>
+        <h2 style="margin-top:0" data-i18n="loginTitle">로그인</h2>
+        <div class="input-row"><label data-i18n="emailLabel">이메일</label><input id="li_email" type="email" data-i18n-placeholder="emailPH"></div>
+        <div class="input-row"><label data-i18n="pwLabel">비밀번호</label><input id="li_pw" type="password" data-i18n-placeholder="pwPH"></div>
         <div class="row">
-          <button class="btn primary" onclick="auth.login()">로그인</button>
+          <button class="btn primary" data-i18n="loginBtn" onclick="auth.login()">로그인</button>
         </div>
         <div id="li_msg" class="help"></div>
         <div class="divider"></div>
-        <button class="btn ghost" onclick="ui.showSignup()">회원가입</button>
+        <button class="btn ghost" data-i18n="signupLink" onclick="ui.showSignup()">회원가입</button>
       </div>
 
       <div id="signupBox" class="card" style="display:none">
-        <h2 style="margin-top:0">기본 정보 기입</h2>
-        <div class="help">가입→기본 정보→내 프로필→이상형 프로필 순으로 진행됩니다. <b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
-        <div class="input-row"><label class="req">이메일</label><input id="su_email" type="email" placeholder="you@example.com"></div>
-        <div class="input-row"><label class="req">닉네임</label><input id="su_nick" placeholder="별명"></div>
-        <div class="input-row"><label class="req">비밀번호</label><input id="su_pw" type="password" placeholder="8자 이상"></div>
+        <h2 style="margin-top:0" data-i18n="signupTitle">기본 정보 기입</h2>
+        <div class="help" data-i18n="signupHelp">가입→기본 정보→내 프로필→이상형 프로필 순으로 진행됩니다. <b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
+        <div class="input-row"><label class="req" data-i18n="emailLabel">이메일</label><input id="su_email" type="email" data-i18n-placeholder="emailPH" placeholder="you@example.com"></div>
+        <div class="input-row"><label class="req" data-i18n="nickLabel">닉네임</label><input id="su_nick" data-i18n-placeholder="nickPH" placeholder="별명"></div>
+        <div class="input-row"><label class="req" data-i18n="pwLabel">비밀번호</label><input id="su_pw" type="password" data-i18n-placeholder="pwPH" placeholder="8자 이상"></div>
         <div class="input-row">
-          <label>약관동의</label>
+          <label data-i18n="tosLabel">약관동의</label>
           <label style="display:flex;align-items:center;gap:8px;align-self:flex-start">
             <input id="su_tos" type="checkbox">
-            서비스 약관에 동의합니다
+            <span data-i18n="tosAgree">서비스 약관에 동의합니다</span>
           </label>
         </div>
-        <button class="btn primary" onclick="auth.signup()">계정 생성</button>
+        <button class="btn primary" data-i18n="signupBtn" onclick="auth.signup()">계정 생성</button>
         <div class="divider"></div>
-        <h3>본인인증(모의)</h3>
-        <div class="input-row"><label>연락수단</label>
-          <select id="su_verify_type"><option value="sms">휴대폰(SMS)</option><option value="email">이메일</option></select>
+        <h3 data-i18n="verifyTitle">본인인증(모의)</h3>
+        <div class="input-row"><label data-i18n="verifyMethod">연락수단</label>
+          <select id="su_verify_type"><option value="sms" data-i18n-option="verifySMS">휴대폰(SMS)</option><option value="email" data-i18n-option="verifyEmail">이메일</option></select>
         </div>
-        <div class="input-row"><label>연락처</label><input id="su_verify_target" placeholder="010-0000-0000 / you@example.com"></div>
+        <div class="input-row"><label data-i18n="contactLabel">연락처</label><input id="su_verify_target" data-i18n-placeholder="contactPH" placeholder="010-0000-0000 / you@example.com"></div>
         <div class="row">
-          <button class="btn ghost" onclick="auth.sendCode()">인증코드 전송(모의)</button>
-          <input id="su_code" placeholder="인증코드 6자리" style="width:160px">
-          <button class="btn ghost" onclick="auth.verifyCode()">인증 확인</button>
+          <button class="btn ghost" data-i18n="sendCode" onclick="auth.sendCode()">인증코드 전송(모의)</button>
+          <input id="su_code" data-i18n-placeholder="codePH" placeholder="인증코드 6자리" style="width:160px">
+          <button class="btn ghost" data-i18n="verifyBtn" onclick="auth.verifyCode()">인증 확인</button>
         </div>
         <div id="su_verify_msg" class="help"></div>
         <div class="divider"></div>
-        <h3>기본 정보</h3>
-        <div class="input-row"><label class="req">성별</label>
-          <select id="ob_gender"><option value="male">남성</option><option value="female">여성</option></select>
+        <h3 data-i18n="basicInfoTitle">기본 정보</h3>
+        <div class="input-row"><label class="req" data-i18n="genderLabel">성별</label>
+          <select id="ob_gender"><option value="male" data-i18n-option="male">남성</option><option value="female" data-i18n-option="female">여성</option></select>
         </div>
-        <div class="input-row"><label class="req">출생년도</label><input id="ob_birth" type="number" min="1950" max="2010" placeholder="1998"></div>
-        <div class="input-row"><label class="req">국가</label>
-          <select id="ob_country"><option value="KR">대한민국</option><option value="JP">일본</option></select>
+        <div class="input-row"><label class="req" data-i18n="birthLabel">출생년도</label><input id="ob_birth" type="number" min="1950" max="2010" data-i18n-placeholder="birthPH" placeholder="1998"></div>
+        <div class="input-row"><label class="req" data-i18n="countryLabel">국가</label>
+          <select id="ob_country"><option value="KR" data-i18n-option="kr">대한민국</option><option value="JP" data-i18n-option="jp">일본</option></select>
         </div>
-        <div class="row sticky-cta"><button class="btn primary" onclick="ui.nextFromStep1()">다음: 내 프로필</button></div>
+        <div class="row sticky-cta"><button class="btn primary" data-i18n="nextProfile" onclick="ui.nextFromStep1()">다음: 내 프로필</button></div>
         <div class="divider"></div>
-        <button class="btn ghost" onclick="ui.showLogin()">로그인으로 돌아가기</button>
+        <button class="btn ghost" data-i18n="backLogin" onclick="ui.showLogin()">로그인으로 돌아가기</button>
       </div>
     </section>
 
     <!-- PROFILE (SELF INFO) -->
     <section id="profile" class="card" style="display:none">
-      <h2>내 프로필</h2>
-      <div class="help"><b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
-      <div class="help">지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.</div>
+      <h2 data-i18n="profileTitle">내 프로필</h2>
+      <div class="help" data-i18n="detailHelp"><b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
+      <div class="help" data-i18n="profilePrivacy">지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.</div>
       <div class="grid">
         <div class="sm-6 card">
           <div class="row">
             <img id="pf_avatar" class="avatar" 
      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" 
      alt="avatar" />
-            <div class="help">정면 증명사진 권장. 데모에서는 로컬 파일만 미리보기.</div>
+            <div class="help" data-i18n="avatarHelp">정면 증명사진 권장. 데모에서는 로컬 파일만 미리보기.</div>
           </div>
-          <div class="input-row"><label>이름(실명)</label><input id="pf_realname" placeholder="홍길동"></div>
-          <div class="input-row"><label>사진 업로드</label><input id="pf_photo" type="file" accept="image/*"></div>
-          <div class="input-row"><label>나이</label><input id="pf_age" type="number" min="18" max="80"></div>
-          <div class="input-row"><label>직업</label><input id="pf_job" placeholder="직업"></div>
-          <div class="input-row"><label>연봉(만원)</label><input id="pf_income" type="number" step="100" placeholder="예: 4200"></div>
-          <div class="input-row"><label>키(cm)</label><input id="pf_height" type="number" step="1" placeholder="예: 175"></div>
-          <div class="input-row"><label>체형</label>
-            <select id="pf_body"><option>슬렌더</option><option>보통</option><option>살집 있음</option></select>
+          <div class="input-row"><label data-i18n="realnameLabel">이름(실명)</label><input id="pf_realname" data-i18n-placeholder="realnamePH" placeholder="홍길동"></div>
+          <div class="input-row"><label data-i18n="photoLabel">사진 업로드</label><input id="pf_photo" type="file" accept="image/*"></div>
+          <div class="input-row"><label data-i18n="ageLabel">나이</label><input id="pf_age" type="number" min="18" max="80"></div>
+          <div class="input-row"><label data-i18n="jobLabel">직업</label><input id="pf_job" data-i18n-placeholder="jobPH" placeholder="직업"></div>
+          <div class="input-row"><label data-i18n="incomeLabel">연봉(만원)</label><input id="pf_income" type="number" step="100" data-i18n-placeholder="incomePH" placeholder="예: 4200"></div>
+          <div class="input-row"><label data-i18n="heightLabel">키(cm)</label><input id="pf_height" type="number" step="1" data-i18n-placeholder="heightPH" placeholder="예: 175"></div>
+          <div class="input-row"><label data-i18n="bodyLabel">체형</label>
+            <select id="pf_body"><option data-i18n-option="slender">슬렌더</option><option data-i18n-option="average">보통</option><option data-i18n-option="chubby">살집 있음</option></select>
           </div>
-          <div class="input-row"><label>MBTI</label>
+          <div class="input-row"><label data-i18n="mbtiLabel">MBTI</label>
             <select id="pf_mbti"></select>
           </div>
-          <div class="input-row"><label>종교</label>
-            <select id="pf_religion"><option>무교</option><option>기독교</option><option>천주교</option><option>불교</option><option>기타</option></select>
+          <div class="input-row"><label data-i18n="religionLabel">종교</label>
+            <select id="pf_religion"><option data-i18n-option="noReligion">무교</option><option data-i18n-option="christian">기독교</option><option data-i18n-option="catholic">천주교</option><option data-i18n-option="buddhist">불교</option><option data-i18n-option="etc">기타</option></select>
           </div>
-          <div class="input-row"><label>학력</label>
-            <select id="pf_edu"><option>고졸</option><option>전문대졸</option><option>대졸</option><option>대학원 이상</option></select>
+          <div class="input-row"><label data-i18n="eduLabel">학력</label>
+            <select id="pf_edu"><option data-i18n-option="highschool">고졸</option><option data-i18n-option="college">전문대졸</option><option data-i18n-option="university">대졸</option><option data-i18n-option="graduate">대학원 이상</option></select>
           </div>
-          <div class="input-row"><label>흡연</label>
-            <select id="pf_smoke"><option>비흡연</option><option>가끔</option><option>흡연</option></select>
+          <div class="input-row"><label data-i18n="smokeLabel">흡연</label>
+            <select id="pf_smoke"><option data-i18n-option="smokeNo">비흡연</option><option data-i18n-option="smokeSometimes">가끔</option><option data-i18n-option="smokeYes">흡연</option></select>
           </div>
-          <div class="input-row"><label>음주</label>
-            <select id="pf_drink"><option>비음주</option><option>가끔</option><option>자주</option></select>
+          <div class="input-row"><label data-i18n="drinkLabel">음주</label>
+            <select id="pf_drink"><option data-i18n-option="drinkNo">비음주</option><option data-i18n-option="drinkSometimes">가끔</option><option data-i18n-option="drinkOften">자주</option></select>
           </div>
-          <div class="input-row"><label>자녀 계획</label>
-            <select id="pf_child"><option>원함</option><option>아직 미정</option><option>원하지 않음</option></select>
+          <div class="input-row"><label data-i18n="childLabel">자녀 계획</label>
+            <select id="pf_child"><option data-i18n-option="childYes">원함</option><option data-i18n-option="childMaybe">아직 미정</option><option data-i18n-option="childNo">원하지 않음</option></select>
           </div>
-          <div class="input-row"><label>취미(자유)</label><input id="pf_hobby" placeholder="등산, 카페, 게임…"></div>
-          <div class="input-row"><label>한마디 소개</label><input id="pf_bio" placeholder="본인을 한마디로…"></div>
-          <button class="btn primary" onclick="data.saveProfile()">저장</button>
+          <div class="input-row"><label data-i18n="hobbyLabel">취미(자유)</label><input id="pf_hobby" data-i18n-placeholder="hobbyPH" placeholder="등산, 카페, 게임…"></div>
+          <div class="input-row"><label data-i18n="bioLabel">한마디 소개</label><input id="pf_bio" data-i18n-placeholder="bioPH" placeholder="본인을 한마디로…"></div>
+          <button class="btn primary" data-i18n="save" onclick="data.saveProfile()">저장</button>
         </div>
         <div class="sm-6 card">
-          <h3>성격 매트릭스(카테고리별 최대 3개)</h3>
+          <h3 data-i18n="matrixTitle">성격 매트릭스(카테고리별 최대 3개)</h3>
           <div id="matrix"></div>
           <div class="divider"></div>
-          <button class="btn ghost" onclick="matrix.clear()">선택 초기화</button>
+          <button class="btn ghost" data-i18n="clearSelection" onclick="matrix.clear()">선택 초기화</button>
         </div>
       </div>
-      <div class="sticky-cta row"><button class="btn primary" onclick="ui.nextFromStep2()">다음: 이상형 프로필</button></div>
+      <div class="sticky-cta row"><button class="btn primary" data-i18n="nextPrefs" onclick="ui.nextFromStep2()">다음: 이상형 프로필</button></div>
     </section>
 
     <!-- PREFERENCES (IDEAL TYPE) -->
     <section id="prefs" class="card" style="display:none">
-      <h2>이상형 프로필</h2>
-      <div class="help"><b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
+      <h2 data-i18n="prefsTitle">이상형 프로필</h2>
+      <div class="help" data-i18n="detailHelp"><b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
       <div class="grid">
         <div class="sm-6 card">
-          <div class="input-row"><label>나이 선호</label>
-            <select id="pr_age_type"><option>동갑</option><option>연하</option><option>연상</option></select>
+          <div class="input-row"><label data-i18n="prefAgeLabel">나이 선호</label>
+            <select id="pr_age_type"><option data-i18n-option="sameAge">동갑</option><option data-i18n-option="younger">연하</option><option data-i18n-option="older">연상</option></select>
           </div>
           <div class="row">
-            <input id="pr_age_min" type="number" placeholder="최소" style="width:100px">
-            <input id="pr_age_max" type="number" placeholder="최대" style="width:100px">
+            <input id="pr_age_min" type="number" style="width:100px" data-i18n-placeholder="minPH" placeholder="최소">
+            <input id="pr_age_max" type="number" style="width:100px" data-i18n-placeholder="maxPH" placeholder="최대">
           </div>
-          <div class="input-row"><label>연봉 최소(만원)</label><input id="pr_income_min" type="number" step="100"></div>
-          <div class="input-row"><label>키 범위(cm)</label>
-            <div class="row"><input id="pr_height_min" type="number" placeholder="최소" style="width:100px"><input id="pr_height_max" type="number" placeholder="최대" style="width:100px"></div>
+          <div class="input-row"><label data-i18n="incomeMin">연봉 최소(만원)</label><input id="pr_income_min" type="number" step="100"></div>
+          <div class="input-row"><label data-i18n="heightRange">키 범위(cm)</label>
+            <div class="row"><input id="pr_height_min" type="number" style="width:100px" data-i18n-placeholder="minPH" placeholder="최소"><input id="pr_height_max" type="number" style="width:100px" data-i18n-placeholder="maxPH" placeholder="최대"></div>
           </div>
-          <div class="input-row"><label>체형</label>
-            <select id="pr_body"><option>무관</option><option>슬렌더</option><option>보통</option><option>살집 있음</option></select>
+          <div class="input-row"><label data-i18n="bodyLabel">체형</label>
+            <select id="pr_body"><option data-i18n-option="any">무관</option><option data-i18n-option="slender">슬렌더</option><option data-i18n-option="average">보통</option><option data-i18n-option="chubby">살집 있음</option></select>
           </div>
-          <div class="input-row"><label>MBTI</label>
-            <select id="pr_mbti"><option>무관</option></select>
+          <div class="input-row"><label data-i18n="mbtiLabel">MBTI</label>
+            <select id="pr_mbti"><option data-i18n-option="any">무관</option></select>
           </div>
-          <div class="input-row"><label>취미(희망)</label><input id="pr_hobby" placeholder="상대 취미 희망"></div>
+          <div class="input-row"><label data-i18n="prefHobbyLabel">취미(희망)</label><input id="pr_hobby" data-i18n-placeholder="prefHobbyPH" placeholder="상대 취미 희망"></div>
         </div>
         <div class="sm-6 card">
-          <h3>성격 선호(카테고리별 3개)</h3>
+          <h3 data-i18n="prefMatrixTitle">성격 선호(카테고리별 3개)</h3>
           <div id="matrixPref"></div>
-          <label class="row" style="margin-top:8px"><input id="pr_deal" type="checkbox"> 선택 조건을 필수(Dealbreaker)로 적용</label>
+          <label class="row" style="margin-top:8px"><input id="pr_deal" type="checkbox"> <span data-i18n="dealbreaker">선택 조건을 필수(Dealbreaker)로 적용</span></label>
           <div class="divider"></div>
-          <button class="btn ghost" onclick="matrixPref.clear()">선택 초기화</button>
+          <button class="btn ghost" data-i18n="clearSelection" onclick="matrixPref.clear()">선택 초기화</button>
         </div>
       </div>
-      <div class="sticky-cta row"><button class="btn primary" onclick="data.savePrefs()">저장</button></div>
+      <div class="sticky-cta row"><button class="btn primary" data-i18n="save" onclick="data.savePrefs()">저장</button></div>
     </section>
 
     <!-- MATCHING -->
     <section id="match" class="card" style="display:none">
-      <h2>5. 매칭</h2>
-      <div class="help">버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.</div>
+      <h2 data-i18n="matchTitle">5. 매칭</h2>
+      <div class="help" data-i18n="matchHelp">버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.</div>
       <div class="row" style="margin:8px 0">
-        <button class="btn primary" onclick="engine.match()">매칭 신청</button>
-        <button class="btn ghost" onclick="demo.seed()">데모용 프로필 재생성</button>
+        <button class="btn primary" data-i18n="matchRequest" onclick="engine.match()">매칭 신청</button>
+        <button class="btn ghost" data-i18n="seedDemo" onclick="demo.seed()">데모용 프로필 재생성</button>
         <span id="match_msg" class="help"></span>
       </div>
       <div id="match_results" class="grid"></div>
@@ -355,22 +355,22 @@
 
     <!-- CHAT -->
     <section id="chat" class="card" style="display:none">
-      <h2>6. 대화 + 자동 번역(모의)</h2>
-      <div class="help">실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.</div>
+      <h2 data-i18n="chatTitle">6. 대화 + 자동 번역(모의)</h2>
+      <div class="help" data-i18n="chatHelp">실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.</div>
       <div class="grid">
         <div class="sm-8 card">
           <div id="chat_log" style="height:260px;overflow:auto;border:1px solid var(--border);border-radius:12px;padding:8px;background:#fff"></div>
           <div class="row" style="margin-top:8px">
-            <input id="chat_input" placeholder="메시지를 입력…" style="flex:1">
-            <button class="btn primary" onclick="chat.send()">보내기</button>
+            <input id="chat_input" data-i18n-placeholder="chatPlaceholder" placeholder="메시지를 입력…" style="flex:1">
+            <button class="btn primary" data-i18n="send" onclick="chat.send()">보내기</button>
           </div>
         </div>
         <div class="sm-4 card">
-          <h3>7. 만남 신청</h3>
-          <p class="help">양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.</p>
+          <h3 data-i18n="meetingTitle">7. 만남 신청</h3>
+          <p class="help" data-i18n="meetingHelp">양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.</p>
           <div class="row">
-            <button class="btn ghost" onclick="chat.requestMeet('offline')">오프라인 만남 신청</button>
-            <button class="btn ghost" onclick="chat.requestMeet('online')">ZOOM 만남 신청</button>
+            <button class="btn ghost" data-i18n="meetOffline" onclick="chat.requestMeet('offline')">오프라인 만남 신청</button>
+            <button class="btn ghost" data-i18n="meetOnline" onclick="chat.requestMeet('online')">ZOOM 만남 신청</button>
           </div>
           <div id="meet_status" class="help" style="margin-top:8px"></div>
         </div>
@@ -435,7 +435,14 @@
         modalHelp:'계정으로 로그인 또는 신규 가입 후 이용하세요.',
         modalLogin:'로그인 하러 가기',
         modalClose:'닫기',
-        footHome:'홈',footStart:'시작하기'
+        footHome:'홈',footStart:'시작하기',
+        loginTitle:'로그인',emailLabel:'이메일',pwLabel:'비밀번호',loginBtn:'로그인',signupLink:'회원가입',
+        signupTitle:'기본 정보 기입',signupHelp:'가입→기본 정보→내 프로필→이상형 프로필 순으로 진행됩니다. <b>자세히 입력할수록 매칭될 확률이 높습니다.</b>',nickLabel:'닉네임',nickPH:'별명',emailPH:'you@example.com',pwPH:'8자 이상',tosLabel:'약관동의',tosAgree:'서비스 약관에 동의합니다',signupBtn:'계정 생성',verifyTitle:'본인인증(모의)',verifyMethod:'연락수단',verifySMS:'휴대폰(SMS)',verifyEmail:'이메일',contactLabel:'연락처',contactPH:'010-0000-0000 / you@example.com',sendCode:'인증코드 전송(모의)',codePH:'인증코드 6자리',verifyBtn:'인증 확인',basicInfoTitle:'기본 정보',genderLabel:'성별',male:'남성',female:'여성',birthLabel:'출생년도',birthPH:'1998',countryLabel:'국가',kr:'대한민국',jp:'일본',nextProfile:'다음: 내 프로필',backLogin:'로그인으로 돌아가기',
+        profileTitle:'내 프로필',detailHelp:'<b>자세히 입력할수록 매칭될 확률이 높습니다.</b>',profilePrivacy:'지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.',avatarHelp:'정면 증명사진 권장. 데모에서는 로컬 파일만 미리보기.',realnameLabel:'이름(실명)',realnamePH:'홍길동',photoLabel:'사진 업로드',ageLabel:'나이',jobLabel:'직업',jobPH:'직업',incomeLabel:'연봉(만원)',incomePH:'예: 4200',heightLabel:'키(cm)',heightPH:'예: 175',bodyLabel:'체형',slender:'슬렌더',average:'보통',chubby:'살집 있음',mbtiLabel:'MBTI',religionLabel:'종교',noReligion:'무교',christian:'기독교',catholic:'천주교',buddhist:'불교',etc:'기타',eduLabel:'학력',highschool:'고졸',college:'전문대졸',university:'대졸',graduate:'대학원 이상',smokeLabel:'흡연',smokeNo:'비흡연',smokeSometimes:'가끔',smokeYes:'흡연',drinkLabel:'음주',drinkNo:'비음주',drinkSometimes:'가끔',drinkOften:'자주',childLabel:'자녀 계획',childYes:'원함',childMaybe:'아직 미정',childNo:'원하지 않음',hobbyLabel:'취미(자유)',hobbyPH:'등산, 카페, 게임…',bioLabel:'한마디 소개',bioPH:'본인을 한마디로…',save:'저장',matrixTitle:'성격 매트릭스(카테고리별 최대 3개)',clearSelection:'선택 초기화',nextPrefs:'다음: 이상형 프로필',
+        prefsTitle:'이상형 프로필',prefAgeLabel:'나이 선호',sameAge:'동갑',younger:'연하',older:'연상',minPH:'최소',maxPH:'최대',incomeMin:'연봉 최소(만원)',heightRange:'키 범위(cm)',any:'무관',prefHobbyLabel:'취미(희망)',prefHobbyPH:'상대 취미 희망',prefMatrixTitle:'성격 선호(카테고리별 3개)',dealbreaker:'선택 조건을 필수(Dealbreaker)로 적용',
+        matchTitle:'5. 매칭',matchHelp:'버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.',matchRequest:'매칭 신청',seedDemo:'데모용 프로필 재생성',
+        chatTitle:'6. 대화 + 자동 번역(모의)',chatHelp:'실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.',chatPlaceholder:'메시지를 입력…',send:'보내기',meetingTitle:'7. 만남 신청',meetingHelp:'양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.',meetOffline:'오프라인 만남 신청',meetOnline:'ZOOM 만남 신청',
+        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입 완료. 인증을 진행하세요',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)'
       },
       ja:{
         badgeLoggedOut:'ログアウト状態',badgeUnverified:'認証必要',badgeVerified:'認証済み',
@@ -460,18 +467,34 @@
         modalHelp:'アカウントでログインまたは新規登録後にご利用ください。',
         modalLogin:'ログインしに行く',
         modalClose:'閉じる',
-        footHome:'ホーム',footStart:'開始する'
+        footHome:'ホーム',footStart:'開始する',
+        loginTitle:'ログイン',emailLabel:'メール',pwLabel:'パスワード',loginBtn:'ログイン',signupLink:'会員登録',
+        signupTitle:'基本情報入力',signupHelp:'登録→基本情報→プロフィール→理想プロフィールの順に進みます。<b>詳しく入力するほどマッチング率が上がります。</b>',nickLabel:'ニックネーム',nickPH:'ニックネーム',emailPH:'you@example.com',pwPH:'8文字以上',tosLabel:'利用規約',tosAgree:'利用規約に同意します',signupBtn:'アカウント作成',verifyTitle:'本人確認(デモ)',verifyMethod:'連絡手段',verifySMS:'携帯電話(SMS)',verifyEmail:'メール',contactLabel:'連絡先',contactPH:'010-0000-0000 / you@example.com',sendCode:'認証コード送信(デモ)',codePH:'認証コード6桁',verifyBtn:'認証確認',basicInfoTitle:'基本情報',genderLabel:'性別',male:'男性',female:'女性',birthLabel:'生年',birthPH:'1998',countryLabel:'国',kr:'韓国',jp:'日本',nextProfile:'次: プロフィール',backLogin:'ログインへ戻る',
+        profileTitle:'プロフィール',detailHelp:'<b>詳しく入力するほどマッチング率が上がります。</b>',profilePrivacy:'入力された情報はマッチングのみに利用され、相手は基本情報のみ閲覧できます。詳しい情報はマッチング後の会話で自由に共有できます。利用者の情報は個人情報保護法によって保護されます。',avatarHelp:'正面の証明写真を推奨。デモではローカルファイルのみプレビュー。',realnameLabel:'氏名',realnamePH:'山田太郎',photoLabel:'写真アップロード',ageLabel:'年齢',jobLabel:'職業',jobPH:'職業',incomeLabel:'年収(万円)',incomePH:'例: 4200',heightLabel:'身長(cm)',heightPH:'例: 175',bodyLabel:'体型',slender:'スレンダー',average:'普通',chubby:'ふくよか',mbtiLabel:'MBTI',religionLabel:'宗教',noReligion:'無宗教',christian:'キリスト教',catholic:'カトリック',buddhist:'仏教',etc:'その他',eduLabel:'学歴',highschool:'高校卒',college:'短大卒',university:'大学卒',graduate:'大学院以上',smokeLabel:'喫煙',smokeNo:'非喫煙',smokeSometimes:'時々',smokeYes:'喫煙',drinkLabel:'飲酒',drinkNo:'飲まない',drinkSometimes:'時々',drinkOften:'よく飲む',childLabel:'子ども計画',childYes:'希望する',childMaybe:'未定',childNo:'希望しない',hobbyLabel:'趣味',hobbyPH:'登山、カフェ、ゲーム…',bioLabel:'ひと言紹介',bioPH:'自己紹介を一言で…',save:'保存',matrixTitle:'性格マトリックス(各カテゴリー最大3つ)',clearSelection:'選択リセット',nextPrefs:'次: 理想プロフィール',
+        prefsTitle:'理想プロフィール',prefAgeLabel:'年齢の希望',sameAge:'同い年',younger:'年下',older:'年上',minPH:'最小',maxPH:'最大',incomeMin:'最低年収(万円)',heightRange:'身長範囲(cm)',any:'指定なし',prefHobbyLabel:'趣味(希望)',prefHobbyPH:'相手に望む趣味',prefMatrixTitle:'性格の好み(各カテゴリー3つ)',dealbreaker:'選択条件を必須(ディールブレイカー)として適用',
+        matchTitle:'5. マッチング',matchHelp:'ボタンを押すとAIスコア(デモ)で上位候補を選び、マネージャー最終選択をシミュレーションします。',matchRequest:'マッチング申請',seedDemo:'デモ用プロフィール再生成',
+        chatTitle:'6. チャット + 自動翻訳(デモ)',chatHelp:'本サービスでは翻訳API(Google/DeepL等)を連携。デモでは言語検出/翻訳を< b>擬似</b>的に行います。',chatPlaceholder:'メッセージを入力…',send:'送信',meetingTitle:'7. 出会い申請',meetingHelp:'双方が同意するとオフライン/オンライン(ZOOM)から日程調整します。',meetOffline:'オフライン出会い申請',meetOnline:'ZOOM出会い申請',
+        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録完了。認証を進めてください',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)'
       }
     };
     const i18n={
       lang:'ko',
       set(l){
         this.lang=l;
+        store.set('lang',l);
         const sel=$('#langSel'); if(sel) sel.value=l;
         document.documentElement.lang=l;
         document.querySelectorAll('[data-i18n]').forEach(el=>{
           const key=el.getAttribute('data-i18n');
           if(messages[l][key]) el.innerHTML=messages[l][key];
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
+          const key=el.getAttribute('data-i18n-placeholder');
+          if(messages[l][key]) el.placeholder=messages[l][key];
+        });
+        document.querySelectorAll('[data-i18n-option]').forEach(el=>{
+          const key=el.getAttribute('data-i18n-option');
+          if(messages[l][key]) el.textContent=messages[l][key];
         });
         ui.badge();
         const fh=document.querySelector('[data-i18n="footHome"]'); if(fh) fh.textContent=messages[l].footHome;
@@ -487,9 +510,9 @@
         const nick=$('#su_nick').value?.trim();
         const pw=$('#su_pw').value;
         const tos=$('#su_tos').checked;
-        if(!email||!nick||!pw||!tos){toast('필수 항목을 확인하세요');return;}
+        if(!email||!nick||!pw||!tos){toast(i18n.t('toastRequired'));return;}
         const users=store.get('users',{});
-        if(users[email]){toast('이미 가입된 이메일입니다');return;}
+        if(users[email]){toast(i18n.t('toastEmailTaken'));return;}
         users[email]={email,nick,pw,verified:false,createdAt:Date.now()};
         store.set('users',users);
         store.set('session',email);
@@ -497,39 +520,39 @@
         ui.refreshNav();
         ui.homeCTA();
         ui.go('home');
-        toast('가입 완료. 인증을 진행하세요');
-        alert('사용자 등록이 완료되었습니다');
+        toast(i18n.t('toastSignupDone'));
+        alert(i18n.t('alertSignupDone'));
       },
       sendCode(){
         const email=store.get('session');
-        if(!email){toast('먼저 가입/로그인 하세요');return;}
+        if(!email){toast(i18n.t('toastNeedLogin'));return;}
         const code=(Math.random()*900000+100000|0).toString();
         store.set('verify',{email,code,ts:Date.now()});
-        $('#su_verify_msg').textContent=`인증코드(모의): ${code}`;
-        toast('인증코드 전송(모의)');
+        $('#su_verify_msg').textContent=`${i18n.t('sendCode')}: ${code}`;
+        toast(i18n.t('toastSendCode'));
       },
       verifyCode(){
         const vv=store.get('verify');
         const code=$('#su_code').value?.trim();
         const users=store.get('users',{});
-        if(!vv){toast('코드 전송 후 시도하세요');return;}
+        if(!vv){toast(i18n.t('toastNeedCode'));return;}
         if(code===vv.code){
           users[vv.email].verified=true;
           store.set('users',users);
-          toast('본인인증 완료');
-          $('#su_verify_msg').textContent='인증됨';
+          toast(i18n.t('toastVerifyDone'));
+          $('#su_verify_msg').textContent=i18n.t('badgeVerified');
           ui.badge();
-          alert('사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다');
-        } else { toast('코드가 올바르지 않습니다'); }
+          alert(i18n.t('alertVerifyDone'));
+        } else { toast(i18n.t('toastCodeWrong')); }
       },
       login(){
         const email=$('#li_email').value?.trim();
         const pw=$('#li_pw').value;
         const u=store.get('users',{})[email];
-        if(!u||u.pw!==pw){$('#li_msg').textContent='이메일/비밀번호를 확인하세요';return;}
+        if(!u||u.pw!==pw){$('#li_msg').textContent=i18n.t('loginFail');return;}
         store.set('session',email);
-        $('#li_msg').textContent='로그인 성공';
-        toast('로그인');
+        $('#li_msg').textContent=i18n.t('loginSuccess');
+        toast(i18n.t('toastLogin'));
         ui.badge();
         ui.refreshNav();
         ui.homeCTA();
@@ -544,7 +567,7 @@
         }
         store.del('session');
         ui.clearForms();
-        toast('로그아웃');
+        toast(i18n.t('toastLogout'));
         ui.badge();
         ui.refreshNav();
         ui.homeCTA();
@@ -566,7 +589,7 @@
         const email=store.get('session');
         if(!email){ui.showModal();return;}
         if((id==='match'||id==='chat') && !ui.hasProfile()){
-          alert('먼저 프로필 작성이 필요합니다');
+          alert(i18n.t('alertNeedProfile'));
           ui.go('profile');
           return;
         }
@@ -630,13 +653,13 @@
         const g=$('#ob_gender').value;
         const b=$('#ob_birth').value;
         const c=$('#ob_country').value;
-        if(!g||!b||!c){toast('기본 정보를 모두 입력하세요');return;}
+        if(!g||!b||!c){toast(i18n.t('toastBasicInfo'));return;}
         ui.go('profile');
       },
       nextFromStep2(){
         const need=['#pf_realname','#pf_age','#pf_income','#pf_height'];
-        for(const sel of need){const v=$(sel).value?.trim(); if(!v){toast('내 프로필을 모두 입력하세요');return;}}
-        const mb=$('#pf_mbti').value; if(!mb){toast('MBTI를 선택하세요');return;}
+        for(const sel of need){const v=$(sel).value?.trim(); if(!v){toast(i18n.t('toastProfileIncomplete'));return;}}
+        const mb=$('#pf_mbti').value; if(!mb){toast(i18n.t('toastSelectMBTI'));return;}
         data.saveProfile(); ui.go('prefs');
       }
     };
@@ -701,7 +724,7 @@
     const data={
       saveProfile(){
         const email=store.get('session');
-        if(!email){toast('로그인 필요');return;}
+        if(!email){toast(i18n.t('toastLoginNeeded'));return;}
         const profile={
           realname:$('#pf_realname').value,
           age:+$('#pf_age').value||null,
@@ -726,15 +749,15 @@
         const db=store.get('profiles',{});
         db[email]=profile;
         store.set('profiles',db);
-        toast('프로필 저장 완료');
-        alert('프로필 저장 완료');
+        toast(i18n.t('toastProfileSaved'));
+        alert(i18n.t('alertProfileSaved'));
         ui.homeCTA();
       },
       savePrefs(){
         const email=store.get('session');
-        if(!email){toast('로그인 필요');return;}
+        if(!email){toast(i18n.t('toastLoginNeeded'));return;}
         const ageMin=$('#pr_age_min').value, ageMax=$('#pr_age_max').value;
-        if(!ageMin||!ageMax){toast('나이 범위를 입력하세요');return;}
+        if(!ageMin||!ageMax){toast(i18n.t('toastAgeRange'));return;}
         const prefs={
           ageType:$('#pr_age_type').value,
           ageMin:+ageMin,
@@ -751,7 +774,7 @@
         const db=store.get('prefs',{});
         db[email]=prefs;
         store.set('prefs',db);
-        toast('이상형 저장 완료');
+        toast(i18n.t('toastPrefsSaved'));
         ui.homeCTA();
         ui.go('match');
       }
@@ -793,10 +816,10 @@
       },
       match(){
         const email=store.get('session');
-        if(!email){toast('로그인 필요');return;}
+        if(!email){toast(i18n.t('toastLoginNeeded'));return;}
         const meProf=store.get('profiles',{})[email];
         const pref=store.get('prefs',{})[email];
-        if(!meProf||!pref){toast('프로필/이상형을 먼저 저장하세요');return;}
+        if(!meProf||!pref){toast(i18n.t('toastNeedProfileSave'));return;}
         const all=store.get('demoUsers',[]).filter(u=>u.email!==email && u.profile?.gender!==meProf.gender);
         const ranked=all.map(u=>({u,score:this.score(meProf,pref,u)})).filter(x=>x.score>=0).sort((a,b)=>b.score-a.score).slice(0,5);
         const host=$('#match_results');
@@ -812,12 +835,12 @@
           d.innerHTML=`<b>${u.profile.realname||u.nick}</b> (${u.profile.age||'?'}세) · ${u.profile.height||'?'}cm · ${u.profile.body}<br><span class=\"muted\">${u.profile.job||'직업 미상'} · 연봉 ${u.profile.income||'?'}만</span><br>MBTI ${u.profile.mbti||'-'} · 취미 ${u.profile.hobby||'-'}`;
           row.appendChild(d);
           c.appendChild(row);
-          const btn=el('button',{class:'btn primary',html:'이 사람과 매칭'},[]);
-          btn.addEventListener('click',()=>{store.set('chat_with',u.email);toast('매칭 성공 (데모)');ui.go('chat')});
+          const btn=el('button',{class:'btn primary',html:i18n.t('matchWith')},[]);
+          btn.addEventListener('click',()=>{store.set('chat_with',u.email);toast(i18n.t('toastMatchSuccess'));ui.go('chat')});
           c.appendChild(el('div',{class:'row' },[btn]));
           host.appendChild(c);
         });
-        $('#match_msg').textContent=`${ranked.length}명 추천됨 (모의 점수)`;
+        $('#match_msg').textContent=`${ranked.length}${i18n.t('matchCount')}`;
       }
     };
 
@@ -851,7 +874,7 @@
       requestMeet(type){
         const st={type,status:'대기',ts:Date.now()};
         store.set('meet_req',st);
-        $('#meet_status').textContent=`${type==='offline'?'오프라인':'ZOOM'} 만남 신청 보냈습니다 (모의)`;
+        $('#meet_status').textContent=i18n.t(type==='offline'?'meetOfflineStatus':'meetOnlineStatus');
       }
     };
     function detect(t){return /[ぁ-んァ-ヶ一-龯]/.test(t)?'JA':/[가-힣]/.test(t)?'KO':'EN'}
@@ -874,7 +897,7 @@
           {email:'jp6@demo',nick:'Mio',profile:{gender:'female',realname:'Mio',age:27,height:169,body:'슬렌더',job:'번역가',income:3900,mbti:'INFP',hobby:'영화, 독서',matrix:pickMatrix(['의사소통:공감을 잘하는,예의 바른'])}}
         ];
         store.set('demoUsers',pool);
-        toast('데모 프로필 10명 생성됨');
+        toast(i18n.t('toastDemoSeed'));
       }
     };
     function pickMatrix(hints){const m={"의사소통":[],"자기개발":[],"문제해결":[],"팀워크":[],"리더십":[],"직업윤리":[]};(hints||[]).forEach(h=>{const [c,ts]=h.split(':');(ts||'').split(',').forEach(t=>t&&m[c].push(t.trim()))});return m}
@@ -884,7 +907,7 @@
       fillMBTI();
       buildMatrix('#matrix','self');
       buildMatrix('#matrixPref','pref');
-      i18n.set('ko');
+      i18n.set(store.get('lang','ko'));
       ui.refreshNav();
       ui.homeCTA();
       ui.go('home');
