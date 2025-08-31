@@ -549,7 +549,8 @@
           if(Object.prototype.hasOwnProperty.call(messages[l],key)) el.textContent=messages[l][key];
         });
         rebuildMatrices();
-        ui.badge();\n      afterSignInHook();
+        ui.badge();
+      afterSignInHook();
         const fh=document.querySelector('[data-i18n="footHome"]'); if(fh) fh.textContent=messages[l].footHome;
         const fs=document.querySelector('[data-i18n="footStart"]'); if(fs) fs.textContent=messages[l].footStart;
       },
@@ -579,7 +580,8 @@
         profiles[email]={gender:g,birthYear:+b,country:c};
         store.set('profiles',profiles);
         store.del('verify');
-        ui.badge();\n      afterSignInHook();
+        ui.badge();
+      afterSignInHook();
         ui.refreshNav();
         ui.homeCTA();
         ui.go('home');
@@ -614,7 +616,8 @@
         store.set('session',email);
         $('#li_msg').textContent=i18n.t('loginSuccess');
         toast(i18n.t('toastLogin'));
-        ui.badge();\n      afterSignInHook();
+        ui.badge();
+      afterSignInHook();
         ui.refreshNav();
         ui.homeCTA();
         ui.go('home');
@@ -629,7 +632,8 @@
         store.del('session');
         ui.clearForms();
         toast(i18n.t('toastLogout'));
-        ui.badge();\n      afterSignInHook();
+        beforeSignOutHook();
+        ui.badge();
         ui.refreshNav();
         ui.homeCTA();
         ui.go('home');
