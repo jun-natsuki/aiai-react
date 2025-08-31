@@ -267,6 +267,7 @@
           <div class="input-row"><label data-i18n="realnameLabel">이름(실명)</label><input id="pf_realname" data-i18n-placeholder="realnamePH" placeholder="홍길동"></div>
           <div class="input-row"><label data-i18n="photoLabel">사진 업로드</label><input id="pf_photo" type="file" accept="image/*"></div>
           <div class="input-row"><label data-i18n="ageLabel">나이</label><input id="pf_age" type="number" min="18" max="80"></div>
+          <div class="help" data-i18n="ageNote"></div>
           <div class="input-row"><label data-i18n="jobLabel">직업</label><input id="pf_job" data-i18n-placeholder="jobPH" placeholder="직업"></div>
           <div class="input-row"><label data-i18n="incomeLabel">연봉(만원)</label><input id="pf_income" type="number" step="100" data-i18n-placeholder="incomePH" placeholder="예: 4200"></div>
           <div class="input-row"><label data-i18n="heightLabel">키(cm)</label><input id="pf_height" type="number" step="1" data-i18n-placeholder="heightPH" placeholder="예: 175"></div>
@@ -318,6 +319,7 @@
             <input id="pr_age_min" type="number" style="width:100px" data-i18n-placeholder="minPH" placeholder="최소">
             <input id="pr_age_max" type="number" style="width:100px" data-i18n-placeholder="maxPH" placeholder="최대">
           </div>
+          <div class="help" data-i18n="prefAgeHelp"></div>
           <div class="input-row"><label data-i18n="incomeMin">연봉 최소(만원)</label><input id="pr_income_min" type="number" step="100"></div>
           <div class="input-row"><label data-i18n="heightRange">키 범위(cm)</label>
             <div class="row"><input id="pr_height_min" type="number" style="width:100px" data-i18n-placeholder="minPH" placeholder="최소"><input id="pr_height_max" type="number" style="width:100px" data-i18n-placeholder="maxPH" placeholder="최대"></div>
@@ -442,7 +444,7 @@
         prefsTitle:'이상형 프로필',prefAgeLabel:'나이 선호',sameAge:'동갑',younger:'연하',older:'연상',minPH:'최소',maxPH:'최대',incomeMin:'연봉 최소(만원)',heightRange:'키 범위(cm)',any:'무관',prefHobbyLabel:'취미(희망)',prefHobbyPH:'상대 취미 희망',prefMatrixTitle:'성격 선호(카테고리별 3개)',dealbreaker:'선택 조건을 필수(Dealbreaker)로 적용',
         matchTitle:'5. 매칭',matchHelp:'버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.',matchRequest:'매칭 신청',seedDemo:'데모용 프로필 재생성',
         chatTitle:'6. 대화 + 자동 번역(모의)',chatHelp:'실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.',chatPlaceholder:'메시지를 입력…',send:'보내기',meetingTitle:'7. 만남 신청',meetingHelp:'양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.',meetOffline:'오프라인 만남 신청',meetOnline:'ZOOM 만남 신청',
-        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입 완료. 인증을 진행하세요',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)'
+        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입 완료. 인증을 진행하세요',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)',ageNote:'만 나이 기준입니다.',prefAgeHelp:'나이 차이는 어느 정도가 괜찮으신가요? -1 +2와 같은 식으로 적어 주세요'
       },
       ja:{
         badgeLoggedOut:'ログアウト状態',badgeUnverified:'認証必要',badgeVerified:'認証済み',
@@ -474,7 +476,7 @@
         prefsTitle:'理想プロフィール',prefAgeLabel:'年齢の希望',sameAge:'同い年',younger:'年下',older:'年上',minPH:'最小',maxPH:'最大',incomeMin:'最低年収(万円)',heightRange:'身長範囲(cm)',any:'指定なし',prefHobbyLabel:'趣味(希望)',prefHobbyPH:'相手に望む趣味',prefMatrixTitle:'性格の好み(各カテゴリー3つ)',dealbreaker:'選択条件を必須(ディールブレイカー)として適用',
         matchTitle:'5. マッチング',matchHelp:'ボタンを押すとAIスコア(デモ)で上位候補を選び、マネージャー最終選択をシミュレーションします。',matchRequest:'マッチング申請',seedDemo:'デモ用プロフィール再生成',
         chatTitle:'6. チャット + 自動翻訳(デモ)',chatHelp:'本サービスでは翻訳API(Google/DeepL等)を連携。デモでは言語検出/翻訳を< b>擬似</b>的に行います。',chatPlaceholder:'メッセージを入力…',send:'送信',meetingTitle:'7. 出会い申請',meetingHelp:'双方が同意するとオフライン/オンライン(ZOOM)から日程調整します。',meetOffline:'オフライン出会い申請',meetOnline:'ZOOM出会い申請',
-        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録完了。認証を進めてください',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)'
+        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録完了。認証を進めてください',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)',ageNote:'',prefAgeHelp:'年齢差はどの程度がよろしいですか？ -1 +2のように記入してください'
       }
     };
     const i18n={
@@ -486,16 +488,17 @@
         document.documentElement.lang=l;
         document.querySelectorAll('[data-i18n]').forEach(el=>{
           const key=el.getAttribute('data-i18n');
-          if(messages[l][key]) el.innerHTML=messages[l][key];
+          if(Object.prototype.hasOwnProperty.call(messages[l],key)) el.innerHTML=messages[l][key];
         });
         document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
           const key=el.getAttribute('data-i18n-placeholder');
-          if(messages[l][key]) el.placeholder=messages[l][key];
+          if(Object.prototype.hasOwnProperty.call(messages[l],key)) el.placeholder=messages[l][key];
         });
         document.querySelectorAll('[data-i18n-option]').forEach(el=>{
           const key=el.getAttribute('data-i18n-option');
-          if(messages[l][key]) el.textContent=messages[l][key];
+          if(Object.prototype.hasOwnProperty.call(messages[l],key)) el.textContent=messages[l][key];
         });
+        rebuildMatrices();
         ui.badge();
         const fh=document.querySelector('[data-i18n="footHome"]'); if(fh) fh.textContent=messages[l].footHome;
         const fs=document.querySelector('[data-i18n="footStart"]'); if(fs) fs.textContent=messages[l].footStart;
@@ -683,17 +686,101 @@
       "직업윤리":["건전한","꼼꼼한","낙천적인","명예를 중시하는","반듯한","방어적인","보수적인","사회적 인식이 높은","소박한","순수한"]
     };
 
+    const MATRIX_CAT_JA={
+      "의사소통":"コミュニケーション",
+      "자기개발":"自己開発",
+      "문제해결":"問題解決",
+      "팀워크":"チームワーク",
+      "리더십":"リーダーシップ",
+      "직업윤리":"職業倫理"
+    };
+
+    const MATRIX_TAG_JA={
+      "의사소통":{
+        "공감을 잘하는":"共感力が高い",
+        "외향적인":"外向的",
+        "내성적인":"内向的",
+        "다정한":"優しい",
+        "설득력 있는":"説得力のある",
+        "센스 있는":"センスがある",
+        "애교 있는":"愛嬌がある",
+        "예의 바른":"礼儀正しい",
+        "재미있는":"面白い",
+        "조력적인":"サポート上手"
+      },
+      "자기개발":{
+        "개인적인":"個人的",
+        "고상한":"上品な",
+        "대담한":"大胆な",
+        "부지런한":"勤勉な",
+        "야심만만한":"野心的な",
+        "열정적인":"情熱的な",
+        "영적인":"スピリチュアル",
+        "재능 있는":"才能がある",
+        "전문적인":"プロフェッショナル"
+      },
+      "문제해결":{
+        "감각적":"感覚的",
+        "객관적인":"客観的",
+        "격정적인":"情熱的",
+        "경계심이 강한":"警戒心が強い",
+        "관찰력이 뛰어난":"観察力が高い",
+        "긍정적인":"前向き",
+        "기발한":"斬新な",
+        "끈기 있는":"粘り強い",
+        "모험심이 강한":"冒険心が強い"
+      },
+      "팀워크":{
+        "감성적":"感情豊か",
+        "겸손한":"謙虚な",
+        "고마워할 줄 아는":"感謝を忘れない",
+        "놀기 좋아하는":"遊び好き",
+        "느긋한":"のんびりした",
+        "다가가기 쉬운":"親しみやすい",
+        "사심이 없는":"利他的",
+        "순종적인":"従順な",
+        "우호적인":"友好的",
+        "위트 있는":"ウィットに富む"
+      },
+      "리더십":{
+        "결단력 있는":"決断力がある",
+        "관대한":"寛大な",
+        "관용적인":"寛容な",
+        "매력적인":"魅力的",
+        "영감을 주는":"インスピレーションを与える",
+        "온화한":"穏やかな",
+        "자비로운":"慈悲深い",
+        "잘 보살피는":"面倒見が良い",
+        "중심이 잡힌":"芯がある",
+        "침착한":"落ち着いている"
+      },
+      "직업윤리":{
+        "건전한":"健全な",
+        "꼼꼼한":"几帳面な",
+        "낙천적인":"楽天的",
+        "명예를 중시하는":"名誉を重んじる",
+        "반듯한":"真面目な",
+        "방어적인":"防御的",
+        "보수적인":"保守的",
+        "사회적 인식이 높은":"社会的認知が高い",
+        "소박한":"素朴な",
+        "순수한":"純粋な"
+      }
+    };
+
     function buildMatrix(containerId,key){
       const wrap=$(containerId);
       wrap.innerHTML='';
       Object.entries(MATRIX).forEach(([cat,tags])=>{
+        const catLabel=i18n.lang==='ja'?(MATRIX_CAT_JA[cat]||cat):cat;
         const box=el('div',{class:'card'});
-        box.appendChild(el('h3',{html:`${cat}`}));
+        box.appendChild(el('h3',{html:catLabel}));
         const list=el('div',{class:'list'});
         tags.forEach(tag=>{
+          const label=i18n.lang==='ja'?(MATRIX_TAG_JA[cat]?.[tag]||tag):tag;
           const id=`${key}:${cat}:${tag}`;
           const item=el('label',{class:'pill'});
-          const txt=el('span',{html:tag});
+          const txt=el('span',{html:label});
           const cb=el('input',{type:'checkbox',id});
           cb.addEventListener('change',()=>limitCategory(key,cat,3,id));
           item.appendChild(txt); item.appendChild(cb);
@@ -708,7 +795,8 @@
       if(selected.length>max){
         const last=document.getElementById(id);
         last.checked=false;
-        toast(`${cat}는 최대 ${max}개`);
+        const catLabel=i18n.lang==='ja'?(MATRIX_CAT_JA[cat]||cat):cat;
+        toast(i18n.lang==='ja'?`${catLabel}は最大${max}個まで`:`${catLabel}는 최대 ${max}개`);
       }
     };
     const matrix={
@@ -719,6 +807,15 @@
       clear(){document.querySelectorAll('input[id^="pref:"]').forEach(x=>x.checked=false);},
       read(){const out={};Object.keys(MATRIX).forEach(cat=>{out[cat]=[...document.querySelectorAll(`input[id^="pref:${cat}:"]`)].filter(x=>x.checked).map(x=>x.id.split(':').pop())});return out;}
     };
+
+    function rebuildMatrices(){
+      const selfSel=matrix.read();
+      const prefSel=matrixPref.read();
+      buildMatrix('#matrix','self');
+      buildMatrix('#matrixPref','pref');
+      Object.entries(selfSel).forEach(([cat,tags])=>{tags.forEach(tag=>{const cb=document.getElementById(`self:${cat}:${tag}`); if(cb) cb.checked=true;});});
+      Object.entries(prefSel).forEach(([cat,tags])=>{tags.forEach(tag=>{const cb=document.getElementById(`pref:${cat}:${tag}`); if(cb) cb.checked=true;});});
+    }
 
     // ---- Data save/load ----
     const data={
