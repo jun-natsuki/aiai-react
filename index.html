@@ -477,6 +477,16 @@
       window.__CURRENT_UID__ = me?.id || null;
       if(window.__CURRENT_UID__){
         stopMatchesSub = subscribeMyMatches(onMatchChanged);
+        try{
+          const { data: rows } = await sb
+            .from('matches')
+            .select('*')
+            .or(`seeker.eq.${window.__CURRENT_UID__},partner.eq.${window.__CURRENT_UID__}`)
+            .limit(1);
+          if(rows && rows.length){
+            await onMatchChanged(rows[0]);
+          }
+        }catch(e){ console.error(e); }
       }
     };
 
@@ -1131,6 +1141,7 @@
       if(langSel) langSel.addEventListener('change',e=>i18n.set(e.target.value));
       ui.refreshNav();
       ui.homeCTA();
+      afterSignInHook();
       if(!store.get('demoUsers')) { demo.seed(); }
       ui.go('home');
       $('#userBadge').setAttribute('role','button');
