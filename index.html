@@ -216,14 +216,6 @@
         <div class="input-row"><label class="req" data-i18n="emailLabel">이메일</label><input id="su_email" type="email" data-i18n-placeholder="emailPH" placeholder="you@example.com" required></div>
         <div class="input-row"><label class="req" data-i18n="nickLabel">닉네임</label><input id="su_nick" data-i18n-placeholder="nickPH" placeholder="별명" required minlength="2" maxlength="20"></div>
         <div class="input-row"><label class="req" data-i18n="pwLabel">비밀번호</label><input id="su_pw" type="password" data-i18n-placeholder="pwPH" placeholder="8자 이상" required minlength="8"></div>
-        <div class="input-row">
-          <label data-i18n="tosLabel">약관동의</label>
-          <label style="display:flex;align-items:center;gap:8px;align-self:flex-start">
-            <input id="su_tos" type="checkbox">
-            <span data-i18n="tosAgree">서비스 약관에 동의합니다</span>
-          </label>
-        </div>
-        <button class="btn primary" data-i18n="signupBtn" onclick="auth.signup()">계정 생성</button>
         <div class="divider"></div>
         <h3 data-i18n="verifyTitle">본인인증(모의)</h3>
         <div class="input-row"><label data-i18n="verifyMethod">연락수단</label>
@@ -245,7 +237,13 @@
         <div class="input-row"><label class="req" data-i18n="countryLabel">국가</label>
           <select id="ob_country"><option value="KR" data-i18n-option="kr">대한민국</option><option value="JP" data-i18n-option="jp">일본</option></select>
         </div>
-        <div class="row sticky-cta"><button class="btn primary" data-i18n="nextProfile" onclick="ui.nextFromStep1()">다음: 내 프로필</button></div>
+        <div class="input-row">
+          <label style="display:flex;align-items:center;gap:8px;align-self:flex-start">
+            <input id="su_tos" type="checkbox">
+            <span data-i18n="tosAgree">서비스 약관에 동의합니다</span>
+          </label>
+        </div>
+        <div class="row sticky-cta"><button class="btn primary" data-i18n="signupBtn" onclick="auth.signup()">계정 생성</button></div>
         <div class="divider"></div>
         <button class="btn ghost" data-i18n="backLogin" onclick="ui.showLogin()">로그인으로 돌아가기</button>
       </div>
@@ -447,7 +445,7 @@
         prefsTitle:'이상형 프로필',prefAgeLabel:'나이 선호',sameAge:'동갑',younger:'연하',older:'연상',minPH:'최소',maxPH:'최대',incomeMin:'연봉 최소(만원)',heightRange:'키 범위(cm)',any:'무관',prefHobbyLabel:'취미(희망)',prefHobbyPH:'상대 취미 희망',prefMatrixTitle:'성격 선호(카테고리별 3개)',dealbreaker:'선택 조건을 필수(Dealbreaker)로 적용',
         matchTitle:'5. 매칭',matchHelp:'버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.',matchRequest:'매칭 신청',seedDemo:'데모용 프로필 재생성',
         chatTitle:'6. 대화 + 자동 번역(모의)',chatHelp:'실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.',chatPlaceholder:'메시지를 입력…',send:'보내기',enterSend:'엔터로 전송',meetingTitle:'7. 만남 신청',meetingHelp:'양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.',meetOffline:'오프라인 만남 신청',meetOnline:'ZOOM 만남 신청',
-        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입 완료. 인증을 진행하세요',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)',ageNote:'만 나이 기준입니다.',prefAgeHelp:'나이 차이는 어느 정도가 괜찮으신가요? -1 +2와 같은 식으로 적어 주세요',toastImageType:'이미지 파일만 업로드하세요',toastImageSize:'2MB 이하 이미지만 가능합니다'
+        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입이 완료되었습니다',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)',ageNote:'만 나이 기준입니다.',prefAgeHelp:'나이 차이는 어느 정도가 괜찮으신가요? -1 +2와 같은 식으로 적어 주세요',toastImageType:'이미지 파일만 업로드하세요',toastImageSize:'2MB 이하 이미지만 가능합니다'
       },
       ja:{
         badgeLoggedOut:'ログアウト状態',badgeUnverified:'認証必要',badgeVerified:'認証済み',
@@ -479,7 +477,7 @@
         prefsTitle:'理想プロフィール',prefAgeLabel:'年齢の希望',sameAge:'同い年',younger:'年下',older:'年上',minPH:'最小',maxPH:'最大',incomeMin:'最低年収(万円)',heightRange:'身長範囲(cm)',any:'指定なし',prefHobbyLabel:'趣味(希望)',prefHobbyPH:'相手に望む趣味',prefMatrixTitle:'性格の好み(各カテゴリー3つ)',dealbreaker:'選択条件を必須(ディールブレイカー)として適用',
         matchTitle:'5. マッチング',matchHelp:'ボタンを押すとAIスコア(デモ)で上位候補を選び、マネージャー最終選択をシミュレーションします。',matchRequest:'マッチング申請',seedDemo:'デモ用プロフィール再生成',
         chatTitle:'6. チャット + 自動翻訳(デモ)',chatHelp:'本サービスでは翻訳API(Google/DeepL等)を連携。デモでは言語検出/翻訳を< b>擬似</b>的に行います。',chatPlaceholder:'メッセージを入力…',send:'送信',enterSend:'Enterで送信',meetingTitle:'7. 出会い申請',meetingHelp:'双方が同意するとオフライン/オンライン(ZOOM)から日程調整します。',meetOffline:'オフライン出会い申請',meetOnline:'ZOOM出会い申請',
-        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録完了。認証を進めてください',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)',ageNote:'',prefAgeHelp:'年齢差はどの程度がよろしいですか？ -1 +2のように記入してください',toastImageType:'画像ファイルのみアップロード可能です',toastImageSize:'2MB以下の画像のみ可能です'
+        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録が完了しました',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)',ageNote:'',prefAgeHelp:'年齢差はどの程度がよろしいですか？ -1 +2のように記入してください',toastImageType:'画像ファイルのみアップロード可能です',toastImageSize:'2MB以下の画像のみ可能です'
       }
     };
     const i18n={
@@ -516,12 +514,22 @@
         const nick=$('#su_nick').value?.trim();
         const pw=$('#su_pw').value;
         const tos=$('#su_tos').checked;
+        const g=$('#ob_gender').value;
+        const b=$('#ob_birth').value;
+        const c=$('#ob_country').value;
+        const vv=store.get('verify');
         if(!email||!nick||!pw||!tos){toast(i18n.t('toastRequired'));return;}
+        if(!vv||!vv.ok||vv.email!==email){toast(i18n.t('toastNeedCode'));return;}
+        if(!g||!b||!c){toast(i18n.t('toastBasicInfo'));return;}
         const users=store.get('users',{});
         if(users[email]){toast(i18n.t('toastEmailTaken'));return;}
-        users[email]={email,nick,pw,verified:false,createdAt:Date.now()};
+        users[email]={email,nick,pw,verified:true,createdAt:Date.now()};
         store.set('users',users);
         store.set('session',email);
+        const profiles=store.get('profiles',{});
+        profiles[email]={gender:g,birthYear:+b,country:c};
+        store.set('profiles',profiles);
+        store.del('verify');
         ui.badge();
         ui.refreshNav();
         ui.homeCTA();
@@ -530,24 +538,22 @@
         alert(i18n.t('alertSignupDone'));
       },
       sendCode(){
-        const email=store.get('session');
-        if(!email){toast(i18n.t('toastNeedLogin'));return;}
+        const email=$('#su_email').value?.trim();
+        if(!email){toast(i18n.t('toastRequired'));return;}
         const code=(Math.random()*900000+100000|0).toString();
-        store.set('verify',{email,code,ts:Date.now()});
+        store.set('verify',{email,code,ts:Date.now(),ok:false});
         $('#su_verify_msg').textContent=`${i18n.t('sendCode')}: ${code}`;
         toast(i18n.t('toastSendCode'));
       },
       verifyCode(){
         const vv=store.get('verify');
         const code=$('#su_code').value?.trim();
-        const users=store.get('users',{});
         if(!vv){toast(i18n.t('toastNeedCode'));return;}
         if(code===vv.code){
-          users[vv.email].verified=true;
-          store.set('users',users);
+          vv.ok=true;
+          store.set('verify',vv);
           toast(i18n.t('toastVerifyDone'));
           $('#su_verify_msg').textContent=i18n.t('badgeVerified');
-          ui.badge();
           alert(i18n.t('alertVerifyDone'));
         } else { toast(i18n.t('toastCodeWrong')); }
       },
@@ -655,13 +661,6 @@
       },
       showModal(){$('#modal').style.display='flex';},
       hideModal(){$('#modal').style.display='none';},
-      nextFromStep1(){
-        const g=$('#ob_gender').value;
-        const b=$('#ob_birth').value;
-        const c=$('#ob_country').value;
-        if(!g||!b||!c){toast(i18n.t('toastBasicInfo'));return;}
-        ui.go('profile');
-      },
       nextFromStep2(){
         const need=['#pf_realname','#pf_age','#pf_income','#pf_height'];
         for(const sel of need){const v=$(sel).value?.trim(); if(!v){toast(i18n.t('toastProfileIncomplete'));return;}}
@@ -1054,7 +1053,6 @@
       bindEnter('#su_email, #su_nick, #su_pw', auth.signup);
       bindEnter('#su_verify_target', auth.sendCode);
       bindEnter('#su_code', auth.verifyCode);
-      bindEnter('#ob_gender, #ob_birth, #ob_country', ui.nextFromStep1);
       bindEnter('#profile input, #profile select', ui.nextFromStep2);
       bindEnter('#prefs input, #prefs select', data.savePrefs);
       const box=document.querySelector('#chat_input');
