@@ -124,7 +124,7 @@
       </a>
       <div class="row" style="gap:8px;align-items:center">
         <div id="userBadge" class="badge warn" data-i18n="badgeLoggedOut"></div>
-        <select id="langSel" onchange="i18n.set(this.value)">
+        <select id="langSel">
           <option value="ko">한국어</option>
           <option value="ja">日本語</option>
         </select>
@@ -200,8 +200,8 @@
     <section id="auth" style="display:none">
       <div id="loginBox" class="card">
         <h2 style="margin-top:0" data-i18n="loginTitle">로그인</h2>
-        <div class="input-row"><label data-i18n="emailLabel">이메일</label><input id="li_email" type="email" data-i18n-placeholder="emailPH"></div>
-        <div class="input-row"><label data-i18n="pwLabel">비밀번호</label><input id="li_pw" type="password" data-i18n-placeholder="pwPH"></div>
+        <div class="input-row"><label data-i18n="emailLabel">이메일</label><input id="li_email" type="email" data-i18n-placeholder="emailPH" required></div>
+        <div class="input-row"><label data-i18n="pwLabel">비밀번호</label><input id="li_pw" type="password" data-i18n-placeholder="pwPH" required></div>
         <div class="row">
           <button class="btn primary" data-i18n="loginBtn" onclick="auth.login()">로그인</button>
         </div>
@@ -213,9 +213,9 @@
       <div id="signupBox" class="card" style="display:none">
         <h2 style="margin-top:0" data-i18n="signupTitle">기본 정보 기입</h2>
         <div class="help" data-i18n="signupHelp">가입→기본 정보→내 프로필→이상형 프로필 순으로 진행됩니다. <b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
-        <div class="input-row"><label class="req" data-i18n="emailLabel">이메일</label><input id="su_email" type="email" data-i18n-placeholder="emailPH" placeholder="you@example.com"></div>
-        <div class="input-row"><label class="req" data-i18n="nickLabel">닉네임</label><input id="su_nick" data-i18n-placeholder="nickPH" placeholder="별명"></div>
-        <div class="input-row"><label class="req" data-i18n="pwLabel">비밀번호</label><input id="su_pw" type="password" data-i18n-placeholder="pwPH" placeholder="8자 이상"></div>
+        <div class="input-row"><label class="req" data-i18n="emailLabel">이메일</label><input id="su_email" type="email" data-i18n-placeholder="emailPH" placeholder="you@example.com" required></div>
+        <div class="input-row"><label class="req" data-i18n="nickLabel">닉네임</label><input id="su_nick" data-i18n-placeholder="nickPH" placeholder="별명" required minlength="2" maxlength="20"></div>
+        <div class="input-row"><label class="req" data-i18n="pwLabel">비밀번호</label><input id="su_pw" type="password" data-i18n-placeholder="pwPH" placeholder="8자 이상" required minlength="8"></div>
         <div class="input-row">
           <label data-i18n="tosLabel">약관동의</label>
           <label style="display:flex;align-items:center;gap:8px;align-self:flex-start">
@@ -266,11 +266,11 @@
           </div>
           <div class="input-row"><label data-i18n="realnameLabel">이름(실명)</label><input id="pf_realname" data-i18n-placeholder="realnamePH" placeholder="홍길동"></div>
           <div class="input-row"><label data-i18n="photoLabel">사진 업로드</label><input id="pf_photo" type="file" accept="image/*"></div>
-          <div class="input-row"><label data-i18n="ageLabel">나이</label><input id="pf_age" type="number" min="18" max="80"></div>
+          <div class="input-row"><label data-i18n="ageLabel">나이</label><input id="pf_age" type="number" min="18" max="100" required></div>
           <div class="help" data-i18n="ageNote"></div>
           <div class="input-row"><label data-i18n="jobLabel">직업</label><input id="pf_job" data-i18n-placeholder="jobPH" placeholder="직업"></div>
-          <div class="input-row"><label data-i18n="incomeLabel">연봉(만원)</label><input id="pf_income" type="number" step="100" data-i18n-placeholder="incomePH" placeholder="예: 4200"></div>
-          <div class="input-row"><label data-i18n="heightLabel">키(cm)</label><input id="pf_height" type="number" step="1" data-i18n-placeholder="heightPH" placeholder="예: 175"></div>
+          <div class="input-row"><label data-i18n="incomeLabel">연봉(만원)</label><input id="pf_income" type="number" step="100" min="0" data-i18n-placeholder="incomePH" placeholder="예: 4200" required></div>
+          <div class="input-row"><label data-i18n="heightLabel">키(cm)</label><input id="pf_height" type="number" step="1" min="120" max="220" data-i18n-placeholder="heightPH" placeholder="예: 175" required></div>
           <div class="input-row"><label data-i18n="bodyLabel">체형</label>
             <select id="pf_body"><option data-i18n-option="slender">슬렌더</option><option data-i18n-option="average">보통</option><option data-i18n-option="chubby">살집 있음</option></select>
           </div>
@@ -365,6 +365,9 @@
           <div class="row" style="margin-top:8px">
             <input id="chat_input" data-i18n-placeholder="chatPlaceholder" placeholder="메시지를 입력…" style="flex:1">
             <button class="btn primary" data-i18n="send" onclick="chat.send()">보내기</button>
+            <label class="row" style="align-items:center;gap:6px;margin-left:8px">
+              <input id="enter_send" type="checkbox" checked> <span data-i18n="enterSend">엔터로 전송</span>
+            </label>
           </div>
         </div>
         <div class="sm-4 card">
@@ -383,9 +386,9 @@
   <div id="toast" class="toast"></div>
 
   <!-- Modal: 로그인 필요 -->
-  <div id="modal" class="modal">
-    <div class="inner">
-      <h3 data-i18n="modalTitle">로그인 이후 사용 가능합니다</h3>
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="inner" tabindex="-1">
+      <h3 id="modalTitle" data-i18n="modalTitle">로그인 이후 사용 가능합니다</h3>
       <p class="help" data-i18n="modalHelp">계정으로 로그인 또는 신규 가입 후 이용하세요.</p>
       <div class="row" style="margin-top:8px">
         <button class="btn primary" data-i18n="modalLogin" onclick="ui.openAuth();ui.hideModal()">로그인 하러 가기</button>
@@ -443,8 +446,8 @@
         profileTitle:'내 프로필',detailHelp:'<b>자세히 입력할수록 매칭될 확률이 높습니다.</b>',profilePrivacy:'지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.',avatarHelp:'정면 증명사진 권장. 데모에서는 로컬 파일만 미리보기.',realnameLabel:'이름(실명)',realnamePH:'홍길동',photoLabel:'사진 업로드',ageLabel:'나이',jobLabel:'직업',jobPH:'직업',incomeLabel:'연봉(만원)',incomePH:'예: 4200',heightLabel:'키(cm)',heightPH:'예: 175',bodyLabel:'체형',slender:'슬렌더',average:'보통',chubby:'살집 있음',mbtiLabel:'MBTI',religionLabel:'종교',noReligion:'무교',christian:'기독교',catholic:'천주교',buddhist:'불교',etc:'기타',eduLabel:'학력',highschool:'고졸',college:'전문대졸',university:'대졸',graduate:'대학원 이상',smokeLabel:'흡연',smokeNo:'비흡연',smokeSometimes:'가끔',smokeYes:'흡연',drinkLabel:'음주',drinkNo:'비음주',drinkSometimes:'가끔',drinkOften:'자주',childLabel:'자녀 계획',childYes:'원함',childMaybe:'아직 미정',childNo:'원하지 않음',hobbyLabel:'취미(자유)',hobbyPH:'등산, 카페, 게임…',bioLabel:'한마디 소개',bioPH:'본인을 한마디로…',save:'저장',matrixTitle:'성격 매트릭스(카테고리별 최대 3개)',clearSelection:'선택 초기화',nextPrefs:'다음: 이상형 프로필',
         prefsTitle:'이상형 프로필',prefAgeLabel:'나이 선호',sameAge:'동갑',younger:'연하',older:'연상',minPH:'최소',maxPH:'최대',incomeMin:'연봉 최소(만원)',heightRange:'키 범위(cm)',any:'무관',prefHobbyLabel:'취미(희망)',prefHobbyPH:'상대 취미 희망',prefMatrixTitle:'성격 선호(카테고리별 3개)',dealbreaker:'선택 조건을 필수(Dealbreaker)로 적용',
         matchTitle:'5. 매칭',matchHelp:'버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.',matchRequest:'매칭 신청',seedDemo:'데모용 프로필 재생성',
-        chatTitle:'6. 대화 + 자동 번역(모의)',chatHelp:'실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.',chatPlaceholder:'메시지를 입력…',send:'보내기',meetingTitle:'7. 만남 신청',meetingHelp:'양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.',meetOffline:'오프라인 만남 신청',meetOnline:'ZOOM 만남 신청',
-        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입 완료. 인증을 진행하세요',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)',ageNote:'만 나이 기준입니다.',prefAgeHelp:'나이 차이는 어느 정도가 괜찮으신가요? -1 +2와 같은 식으로 적어 주세요'
+        chatTitle:'6. 대화 + 자동 번역(모의)',chatHelp:'실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.',chatPlaceholder:'메시지를 입력…',send:'보내기',enterSend:'엔터로 전송',meetingTitle:'7. 만남 신청',meetingHelp:'양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.',meetOffline:'오프라인 만남 신청',meetOnline:'ZOOM 만남 신청',
+        toastRequired:'필수 항목을 확인하세요',toastEmailTaken:'이미 가입된 이메일입니다',toastSignupDone:'가입 완료. 인증을 진행하세요',alertSignupDone:'사용자 등록이 완료되었습니다',toastNeedLogin:'먼저 가입/로그인 하세요',toastSendCode:'인증코드 전송(모의)',toastNeedCode:'코드 전송 후 시도하세요',toastVerifyDone:'본인인증 완료',alertVerifyDone:'사용자 본인인증이 완료되었습니다. 이제 더 많은 기능에 접근할 수 있습니다',toastCodeWrong:'코드가 올바르지 않습니다',loginFail:'이메일/비밀번호를 확인하세요',loginSuccess:'로그인 성공',toastLogin:'로그인',toastLogout:'로그아웃',toastBasicInfo:'기본 정보를 모두 입력하세요',toastProfileIncomplete:'내 프로필을 모두 입력하세요',toastSelectMBTI:'MBTI를 선택하세요',toastLoginNeeded:'로그인 필요',toastProfileSaved:'프로필 저장 완료',alertProfileSaved:'프로필 저장 완료',toastAgeRange:'나이 범위를 입력하세요',toastPrefsSaved:'이상형 저장 완료',toastNeedProfileSave:'프로필/이상형을 먼저 저장하세요',matchWith:'이 사람과 매칭',toastMatchSuccess:'매칭 성공 (데모)',matchCount:'명 추천됨 (모의 점수)',toastDemoSeed:'데모 프로필 10명 생성됨',alertNeedProfile:'먼저 프로필 작성이 필요합니다',meetOfflineStatus:'오프라인 만남 신청 보냈습니다 (모의)',meetOnlineStatus:'ZOOM 만남 신청 보냈습니다 (모의)',ageNote:'만 나이 기준입니다.',prefAgeHelp:'나이 차이는 어느 정도가 괜찮으신가요? -1 +2와 같은 식으로 적어 주세요',toastImageType:'이미지 파일만 업로드하세요',toastImageSize:'2MB 이하 이미지만 가능합니다'
       },
       ja:{
         badgeLoggedOut:'ログアウト状態',badgeUnverified:'認証必要',badgeVerified:'認証済み',
@@ -475,8 +478,8 @@
         profileTitle:'プロフィール',detailHelp:'<b>詳しく入力するほどマッチング率が上がります。</b>',profilePrivacy:'入力された情報はマッチングのみに利用され、相手は基本情報のみ閲覧できます。詳しい情報はマッチング後の会話で自由に共有できます。利用者の情報は個人情報保護法によって保護されます。',avatarHelp:'正面の証明写真を推奨。デモではローカルファイルのみプレビュー。',realnameLabel:'氏名',realnamePH:'山田太郎',photoLabel:'写真アップロード',ageLabel:'年齢',jobLabel:'職業',jobPH:'職業',incomeLabel:'年収(万円)',incomePH:'例: 4200',heightLabel:'身長(cm)',heightPH:'例: 175',bodyLabel:'体型',slender:'スレンダー',average:'普通',chubby:'ふくよか',mbtiLabel:'MBTI',religionLabel:'宗教',noReligion:'無宗教',christian:'キリスト教',catholic:'カトリック',buddhist:'仏教',etc:'その他',eduLabel:'学歴',highschool:'高校卒',college:'短大卒',university:'大学卒',graduate:'大学院以上',smokeLabel:'喫煙',smokeNo:'非喫煙',smokeSometimes:'時々',smokeYes:'喫煙',drinkLabel:'飲酒',drinkNo:'飲まない',drinkSometimes:'時々',drinkOften:'よく飲む',childLabel:'子ども計画',childYes:'希望する',childMaybe:'未定',childNo:'希望しない',hobbyLabel:'趣味',hobbyPH:'登山、カフェ、ゲーム…',bioLabel:'ひと言紹介',bioPH:'自己紹介を一言で…',save:'保存',matrixTitle:'性格マトリックス(各カテゴリー最大3つ)',clearSelection:'選択リセット',nextPrefs:'次: 理想プロフィール',
         prefsTitle:'理想プロフィール',prefAgeLabel:'年齢の希望',sameAge:'同い年',younger:'年下',older:'年上',minPH:'最小',maxPH:'最大',incomeMin:'最低年収(万円)',heightRange:'身長範囲(cm)',any:'指定なし',prefHobbyLabel:'趣味(希望)',prefHobbyPH:'相手に望む趣味',prefMatrixTitle:'性格の好み(各カテゴリー3つ)',dealbreaker:'選択条件を必須(ディールブレイカー)として適用',
         matchTitle:'5. マッチング',matchHelp:'ボタンを押すとAIスコア(デモ)で上位候補を選び、マネージャー最終選択をシミュレーションします。',matchRequest:'マッチング申請',seedDemo:'デモ用プロフィール再生成',
-        chatTitle:'6. チャット + 自動翻訳(デモ)',chatHelp:'本サービスでは翻訳API(Google/DeepL等)を連携。デモでは言語検出/翻訳を< b>擬似</b>的に行います。',chatPlaceholder:'メッセージを入力…',send:'送信',meetingTitle:'7. 出会い申請',meetingHelp:'双方が同意するとオフライン/オンライン(ZOOM)から日程調整します。',meetOffline:'オフライン出会い申請',meetOnline:'ZOOM出会い申請',
-        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録完了。認証を進めてください',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)',ageNote:'',prefAgeHelp:'年齢差はどの程度がよろしいですか？ -1 +2のように記入してください'
+        chatTitle:'6. チャット + 自動翻訳(デモ)',chatHelp:'本サービスでは翻訳API(Google/DeepL等)を連携。デモでは言語検出/翻訳を< b>擬似</b>的に行います。',chatPlaceholder:'メッセージを入力…',send:'送信',enterSend:'Enterで送信',meetingTitle:'7. 出会い申請',meetingHelp:'双方が同意するとオフライン/オンライン(ZOOM)から日程調整します。',meetOffline:'オフライン出会い申請',meetOnline:'ZOOM出会い申請',
+        toastRequired:'必須項目を確認してください',toastEmailTaken:'既に登録されたメールです',toastSignupDone:'登録完了。認証を進めてください',alertSignupDone:'ユーザー登録が完了しました',toastNeedLogin:'まず登録/ログインしてください',toastSendCode:'認証コード送信(デモ)',toastNeedCode:'コード送信後に試してください',toastVerifyDone:'本人認証完了',alertVerifyDone:'本人認証が完了しました。さらに多くの機能が利用できます',toastCodeWrong:'コードが正しくありません',loginFail:'メール/パスワードを確認してください',loginSuccess:'ログイン成功',toastLogin:'ログイン',toastLogout:'ログアウト',toastBasicInfo:'基本情報をすべて入力してください',toastProfileIncomplete:'プロフィールをすべて入力してください',toastSelectMBTI:'MBTIを選択してください',toastLoginNeeded:'ログインが必要です',toastProfileSaved:'プロフィール保存完了',alertProfileSaved:'プロフィール保存完了',toastAgeRange:'年齢範囲を入力してください',toastPrefsSaved:'理想プロフィール保存完了',toastNeedProfileSave:'プロフィール/理想を先に保存してください',matchWith:'この相手とマッチング',toastMatchSuccess:'マッチング成功(デモ)',matchCount:'名 推薦 (デモスコア)',toastDemoSeed:'デモプロフィール10人生成',alertNeedProfile:'まずプロフィール入力が必要です',meetOfflineStatus:'オフライン出会いを申請しました(デモ)',meetOnlineStatus:'ZOOM出会いを申請しました(デモ)',ageNote:'',prefAgeHelp:'年齢差はどの程度がよろしいですか？ -1 +2のように記入してください',toastImageType:'画像ファイルのみアップロード可能です',toastImageSize:'2MB以下の画像のみ可能です'
       }
     };
     const i18n={
@@ -666,6 +669,37 @@
         data.saveProfile(); ui.go('prefs');
       }
     };
+
+    (()=>{
+      const modal=document.getElementById('modal');
+      const inner=modal?.querySelector('.inner');
+      let lastFocused=null;
+      function trap(e){
+        if(e.key==='Tab'){
+          const f=inner.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+          const focusables=Array.from(f).filter(el=>!el.disabled && el.offsetParent!==null);
+          if(!focusables.length) return;
+          const first=focusables[0], last=focusables[focusables.length-1];
+          if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+        } else if(e.key==='Escape'){
+          ui.hideModal();
+        }
+      }
+      const oldShow=ui.showModal, oldHide=ui.hideModal;
+      ui.showModal=()=>{
+        lastFocused=document.activeElement;
+        modal.style.display='flex';
+        inner.setAttribute('tabindex','-1');
+        inner.focus();
+        document.addEventListener('keydown',trap);
+      };
+      ui.hideModal=()=>{
+        modal.style.display='none';
+        document.removeEventListener('keydown',trap);
+        if(lastFocused) lastFocused.focus();
+      };
+    })();
 
     // ---- MBTI options ----
     const MBTIs=["INTJ","INTP","ENTJ","ENTP","INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP"];
@@ -882,6 +916,8 @@
       if(e.target && e.target.id==='pf_photo'){
         const f=e.target.files?.[0];
         if(!f) return;
+        if(!/^image\//.test(f.type)){ toast(i18n.t('toastImageType')); return; }
+        if(f.size > 2*1024*1024){ toast(i18n.t('toastImageSize')); return; }
         const r=new FileReader();
         r.onload=()=>{store.set('tmp_photo_'+store.get('session'),r.result);$('#pf_avatar').src=r.result};
         r.readAsDataURL(f);
@@ -1004,10 +1040,16 @@
       fillMBTI();
       buildMatrix('#matrix','self');
       buildMatrix('#matrixPref','pref');
-      i18n.set(store.get('lang','ko'));
+      const savedLang = store.get('lang','ko');
+      i18n.set(savedLang);
+      const langSel=document.getElementById('langSel');
+      if(langSel) langSel.addEventListener('change',e=>i18n.set(e.target.value));
       ui.refreshNav();
       ui.homeCTA();
+      if(!store.get('demoUsers')) { demo.seed(); }
       ui.go('home');
+      $('#userBadge').setAttribute('role','button');
+      $('#userBadge').addEventListener('click',()=>{ if(!store.get('session')) ui.openAuth(); });
       bindEnter('#li_email, #li_pw', auth.login);
       bindEnter('#su_email, #su_nick, #su_pw', auth.signup);
       bindEnter('#su_verify_target', auth.sendCode);
@@ -1015,7 +1057,16 @@
       bindEnter('#ob_gender, #ob_birth, #ob_country', ui.nextFromStep1);
       bindEnter('#profile input, #profile select', ui.nextFromStep2);
       bindEnter('#prefs input, #prefs select', data.savePrefs);
-      bindEnter('#chat_input', () => chat.send());
+      const box=document.querySelector('#chat_input');
+      box.addEventListener('keydown',(e)=>{
+        const enterToSend=document.querySelector('#enter_send')?.checked;
+        if(e.key==='Enter' && !e.shiftKey){
+          if(enterToSend){
+            e.preventDefault();
+            chat.send();
+          }
+        }
+      });
     }
     document.addEventListener('DOMContentLoaded', init);
   </script>
