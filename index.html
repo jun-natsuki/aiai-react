@@ -622,7 +622,8 @@
         ui.homeCTA();
         ui.go('home');
       },
-      logout(){
+      logout(){      beforeSignOutHook();
+
         const email=store.get('session');
         if(email){
           store.del('tmp_photo_'+email);
@@ -632,8 +633,8 @@
         store.del('session');
         ui.clearForms();
         toast(i18n.t('toastLogout'));
-        beforeSignOutHook();
         ui.badge();
+      afterSignInHook();
         ui.refreshNav();
         ui.homeCTA();
         ui.go('home');
@@ -1120,126 +1121,6 @@
       });
     }
     document.addEventListener('DOMContentLoaded', init);
-
-// === Supabase Matching Realtime ===
-async function getMe(){
-  const { data } = await sb.auth.getUser();
-  return data.user || null;
-}
-
-async function fetchProfile(userId){
-  const { data, error } = await sb.from('profiles').select('*').eq('user_id', userId).maybeSingle();
-  if(error) throw error;
-  return data;
-}
-
-function subscribeMyMatches(onChange) {
-  const ch = sb.channel('matches-live');
-  ch.on('postgres_changes', {
-    event: '*', schema: 'public', table: 'matches',
-    filter: `seeker=eq.${window.__CURRENT_UID__}`
-  }, (payload)=>onChange(payload.new,payload));
-  ch.on('postgres_changes', {
-    event: '*', schema: 'public', table: 'matches',
-    filter: `partner=eq.${window.__CURRENT_UID__}`
-  }, (payload)=>onChange(payload.new,payload));
-  ch.subscribe();
-  return () => sb.removeChannel(ch);
-}
-
-async function onMatchChanged(row){
-  if(!row) return;
-  const me = window.__CURRENT_UID__;
-  const partnerId = row.seeker===me ? row.partner : row.seeker;
-  const p = await fetchProfile(partnerId);
-  const ok = confirm(`매칭이 완료되었습니다! 상대: ${p?.nickname || '(닉네임 없음)'}`);
-  if(ok){
-    const conv = await ensureConversation(partnerId);
-    window.__CURRENT_CONV_ID__ = conv.id;
-    enterChat(conv.id); // 채팅 입장
-    ui.go('chat');
-  }
-}
-
-async function ensureConversation(partnerId){
-  const me = window.__CURRENT_UID__;
-  const { data: existing } = await sb.from('conversations')
-    .select('*')
-    .or(`and(user_a.eq.${me},user_b.eq.${partnerId}),and(user_a.eq.${partnerId},user_b.eq.${me})`)
-    .limit(1);
-  if(existing && existing.length) return existing[0];
-  const { data, error } = await sb.from('conversations')
-    .insert({ user_a: me, user_b: partnerId }).select().single();
-  if(error) throw error;
-  return data;
-}
-
-let stopMatchesSub=null;
-async function afterSignInHook(){
-  const me = await getMe();
-  if(!me) return;
-  window.__CURRENT_UID__=me.id;
-  stopMatchesSub = subscribeMyMatches(onMatchChanged);
-}
-async function beforeSignOutHook(){
-  if(stopMatchesSub){ stopMatchesSub(); stopMatchesSub=null; }
-  window.__CURRENT_UID__=null;
-}
-
-// === Supabase Chat Realtime ===
-async function sendMessage(conv_id, text, lang="ko"){
-  const me = window.__CURRENT_UID__;
-  const { error } = await sb.from('messages').insert({
-    conv_id, sender: me, text, lang
-  });
-  if(error) console.error("메시지 전송 실패:", error);
-}
-
-function subscribeMessages(conv_id, onNewMsg){
-  const ch = sb.channel('chat-'+conv_id);
-  ch.on('postgres_changes', {
-    event: 'INSERT',
-    schema: 'public',
-    table: 'messages',
-    filter: `conv_id=eq.${conv_id}`
-  }, (payload)=>onNewMsg(payload.new));
-  ch.subscribe();
-  return () => sb.removeChannel(ch);
-}
-
-function renderMessage(msg){
-  const box = document.querySelector('#chat_messages');
-  if(!box) return;
-  const div = document.createElement('div');
-  div.className = (msg.sender===window.__CURRENT_UID__) ? 'msg mine' : 'msg theirs';
-  div.innerText = msg.text;
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-let stopMsgSub=null;
-async function enterChat(conv_id){
-  window.__CURRENT_CONV_ID__=conv_id;
-  if(stopMsgSub){ stopMsgSub(); stopMsgSub=null; }
-  stopMsgSub = subscribeMessages(conv_id, renderMessage);
-  const { data } = await sb.from('messages').select('*').eq('conv_id', conv_id).order('created_at',{ascending:true});
-  if(data) data.forEach(renderMessage);
-}
-
-// 채팅 전송 버튼 연결
-document.addEventListener('DOMContentLoaded', ()=>{
-  const btn = document.querySelector('#chat_send_btn');
-  if(btn){
-    btn.addEventListener('click', async ()=>{
-      const input = document.querySelector('#chat_input');
-      const txt = input.value.trim();
-      if(!txt) return;
-      await sendMessage(window.__CURRENT_CONV_ID__, txt, 'ko');
-      input.value="";
-    });
-  }
-});
-
 
 // === Supabase Matching Realtime ===
 async function getMe(){
