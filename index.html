@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -779,9 +780,8 @@
           const prof=store.get('my_profile');
           const u=store.get('users',{})[email];
           const nick=prof?.nickname || u?.nick || email;
-          const verified=u?.verified;
-          badge.textContent=`${nick} · ${verified?i18n.t('badgeVerified'):i18n.t('badgeUnverified')}`;
-          badge.className='badge '+(verified?'good':'warn');
+          badge.textContent=`${nick}님 반갑습니다!`;
+          badge.className='badge good';
         } else {
           badge.textContent=i18n.t('badgeLoggedOut');
           badge.className='badge warn';
