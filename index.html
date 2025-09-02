@@ -433,14 +433,60 @@
       return data.user || null;
     }
 
-    async function fetchProfile(userId){
-      const { data, error } = await sb
-        .from('profiles')
-        .select('nickname, nick, avatar_url')
-        .eq('user_id', userId)
-        .maybeSingle();
-      if(error) throw error;
-      return data;
+async function fetchProfile(userId){
+  const { data, error } = await sb
+    .from('profiles')
+    .select('nickname, nick, avatar_url')
+    .eq('user_id', userId)
+    .maybeSingle();
+  if(error) throw error;
+  return data;
+}
+
+    // 내 프로필을 보장: 닉네임이 없으면 이메일 앞부분으로 생성
+    async function ensureMyProfile(){
+      if(!sb || !window.__CURRENT_UID__) return null;
+      let prof = store.get('my_profile');
+      if(prof?.nickname || prof?.nick) return prof;
+      let row=null;
+      try{
+        const { data } = await sb
+          .from('profiles')
+          .select('nickname, nick, avatar_url')
+          .eq('user_id', window.__CURRENT_UID__)
+          .maybeSingle();
+        row=data;
+      }catch(e){ console.error(e); }
+
+      const email = store.get('session')||'';
+      const fallback = email.split('@')[0]||email;
+      if(row && (row.nickname || row.nick)){
+        store.set('my_profile', row);
+        return row;
+      }
+
+      let inserted=null;
+      try{
+        if(row){
+          const { data } = await sb.from('profiles')
+            .update({ nickname:fallback, nick:fallback })
+            .eq('user_id', window.__CURRENT_UID__)
+            .select()
+            .maybeSingle();
+          inserted=data;
+        }else{
+          const { data } = await sb.from('profiles')
+            .insert({ user_id: window.__CURRENT_UID__, nickname:fallback, nick:fallback })
+            .select()
+            .maybeSingle();
+          inserted=data;
+        }
+      }catch(e){ console.error(e); }
+      if(inserted){
+        store.set('my_profile', inserted);
+        return inserted;
+      }
+      return null;
     }
 
     function subscribeMyMatches(onChange){
@@ -497,10 +543,9 @@
       if(!window.__CURRENT_UID__) return;
       if(stopMatchesSub){ stopMatchesSub(); }
       try{
-        const prof = await fetchProfile(window.__CURRENT_UID__);
-        if(prof) store.set('my_profile', prof);
+        await ensureMyProfile();
       }catch(e){ console.error(e); }
-      ui.badge();
+      await ui.badge();
       stopMatchesSub = subscribeMyMatches(onMatchChanged);
       try{
         const { data: rows } = await sb
@@ -681,12 +726,10 @@
             country: c
           });
         }catch(e){ console.error(e); }
-        store.set('my_profile',{ nickname: nick, nick });
         store.del('verify');
-        ui.badge();
+        await afterSignInHook(data.user);
         ui.refreshNav();
         ui.homeCTA();
-        await afterSignInHook(data.user);
         data.loadProfile();
         data.loadPrefs();
         ui.go('home');
@@ -783,13 +826,13 @@
         $('#signupBox').style.display='none';
         $('#loginBox').style.display='block';
       },
-      badge(){
+      async badge(){
         const email=store.get('session');
         const badge=$('#userBadge');
         if(email){
-        const prof=store.get('my_profile');
-        const u=store.get('users',{})[email];
-        const nick=prof?.nickname || prof?.nick || u?.nick || email;
+          let prof=store.get('my_profile');
+          if(!prof) prof = await ensureMyProfile();
+          const nick = prof?.nickname || prof?.nick || (email.split('@')[0]) || email;
           badge.textContent=`${nick}님 반갑습니다!`;
           badge.className='badge good';
         } else {
