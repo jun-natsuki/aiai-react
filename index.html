@@ -458,34 +458,27 @@ async function fetchProfile(userId){
         row=data;
       }catch(e){ console.error(e); }
 
-      const email = store.get('session')||'';
-      const fallback = email.split('@')[0]||email;
       if(row && (row.nickname || row.nick)){
         store.set('my_profile', row);
         return row;
       }
 
-      let inserted=null;
+      const email = store.get('session')||'';
+      const fallback = email.split('@')[0]||email;
       try{
-        if(row){
-          const { data } = await sb.from('profiles')
-            .update({ nickname:fallback, nick:fallback })
-            .eq('user_id', window.__CURRENT_UID__)
-            .select()
-            .maybeSingle();
-          inserted=data;
-        }else{
-          const { data } = await sb.from('profiles')
-            .insert({ user_id: window.__CURRENT_UID__, nickname:fallback, nick:fallback })
-            .select()
-            .maybeSingle();
-          inserted=data;
+        const { data } = await sb.from('profiles')
+          .upsert({
+            user_id: window.__CURRENT_UID__,
+            nickname: row?.nickname ?? fallback,
+            nick: row?.nick ?? fallback
+          }, { onConflict: 'user_id' })
+          .select()
+          .maybeSingle();
+        if(data){
+          store.set('my_profile', data);
+          return data;
         }
       }catch(e){ console.error(e); }
-      if(inserted){
-        store.set('my_profile', inserted);
-        return inserted;
-      }
       return null;
     }
 
@@ -717,14 +710,18 @@ async function fetchProfile(userId){
         store.set('session',email);
         store.set('last_email',email);
         try{
-          await sb.from('profiles').upsert({
-            user_id: data.user.id,
-            nickname: nick,
-            nick,
-            gender: g,
-            birth_year: +b,
-            country: c
-          });
+          const { data: prof } = await sb.from('profiles')
+            .upsert({
+              user_id: data.user.id,
+              nickname: nick,
+              nick,
+              gender: g,
+              birth_year: +b,
+              country: c
+            }, { onConflict: 'user_id' })
+            .select()
+            .maybeSingle();
+          if(prof){ store.set('my_profile', prof); }
         }catch(e){ console.error(e); }
         store.del('verify');
         await afterSignInHook(data.user);
