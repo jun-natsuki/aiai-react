@@ -148,7 +148,7 @@
       <nav>
         <a id="nav-home" class="navlink" data-i18n="navHome" href="#home" onclick="event.preventDefault(); ui.go('home');">홈</a>
         <a id="nav-login" class="navlink" data-i18n="navLogin" href="#auth" onclick="event.preventDefault(); ui.openAuth();">로그인</a>
-        <a id="nav-profile" class="navlink" data-i18n="navProfile" href="#profile" onclick="event.preventDefault(); ui.goProtected('profile');">프로필</a>
+        <a id="nav-profile" class="navlink" data-i18n="navProfile" href="#profile" onclick="event.preventDefault(); ui.goProtected('profile');">내 프로필</a>
         <a id="nav-match" class="navlink" data-i18n="navMatch" href="#match" onclick="event.preventDefault(); ui.goProtected('match');">매칭</a>
         <a id="nav-chat" class="navlink" data-i18n="navChat" href="#chat" onclick="event.preventDefault(); ui.goProtected('chat');">대화</a>
         <a id="nav-logout" class="navlink" data-i18n="navLogout" href="#logout" onclick="event.preventDefault(); ui.logout();" style="display:none">로그아웃</a>
@@ -266,7 +266,7 @@
 
     <!-- PROFILE (SELF INFO) -->
     <section id="profile" class="card" style="display:none">
-      <h2 data-i18n="profileTitle">내 프로필</h2>
+      <h2 data-i18n="profileTitle">내 프로필 입력/편집</h2>
       <div class="help" data-i18n="detailHelp"><b>자세히 입력할수록 매칭될 확률이 높습니다.</b></div>
       <div class="help" data-i18n="profilePrivacy">지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.</div>
       <div class="grid">
@@ -434,7 +434,11 @@
     }
 
     async function fetchProfile(userId){
-      const { data, error } = await sb.from('profiles').select('nickname, avatar_url').eq('user_id', userId).maybeSingle();
+      const { data, error } = await sb
+        .from('profiles')
+        .select('nickname, nick, avatar_url')
+        .eq('user_id', userId)
+        .maybeSingle();
       if(error) throw error;
       return data;
     }
@@ -556,7 +560,7 @@
     const messages={
       ko:{
         badgeLoggedOut:'로그아웃 상태',badgeUnverified:'인증 필요',badgeVerified:'인증됨',
-        navHome:'홈',navLogin:'로그인',navProfile:'프로필',navMatch:'매칭',navChat:'대화',navLogout:'로그아웃',
+        navHome:'홈',navLogin:'로그인',navProfile:'내 프로필',navMatch:'매칭',navChat:'대화',navLogout:'로그아웃',
         heroTitle:'간단히 시작하는 <b>진지한 만남</b>',heroSub:'AI 1차 점수 + 매니저 최종 매칭. <b>10분 내 매칭</b>을 약속하는 한·일 결혼/교제 서비스.',start:'지금 시작하기',taglineTitle:'예비 신부들이 당신을 기다리고 있습니다.',taglineDesc:'문화 교류의 활발화, 항공편의 발달, K-POP과 애니메이션 인기 등으로 한일 결혼 성사율이 빠르게 높아지고 있습니다.',profileCtaMsg:'먼저 프로필을 작성하세요',profileCtaBtn:'프로필 작성',
         featuresTitle:'AiAi의 강점',feat1Title:'10분 내 매칭',feat1Desc:'AI 스코어링 후 매니저가 최종 선택',
         feat2Title:'자동 번역 채팅',feat2Desc:'KO⇄JA 실시간 대화로<br>상대의 호감을 먼저 확인하세요',
@@ -580,7 +584,7 @@
         footHome:'홈',footStart:'시작하기',
         loginTitle:'로그인',emailLabel:'이메일',pwLabel:'비밀번호',loginBtn:'로그인',signupLink:'회원가입',
         signupTitle:'기본 정보 기입',signupHelp:'가입→기본 정보→내 프로필→이상형 프로필 순으로 진행됩니다. <b>자세히 입력할수록 매칭될 확률이 높습니다.</b>',nickLabel:'닉네임',nickPH:'별명',emailPH:'you@example.com',pwPH:'8자 이상',tosLabel:'약관동의',tosAgree:'서비스 약관에 동의합니다',signupBtn:'계정 생성',verifyTitle:'본인인증(모의)',verifyMethod:'연락수단',verifySMS:'휴대폰(SMS)',verifyEmail:'이메일',contactLabel:'연락처',contactPH:'010-0000-0000 / you@example.com',sendCode:'인증코드 전송(모의)',codePH:'인증코드 6자리',verifyBtn:'인증 확인',basicInfoTitle:'기본 정보',genderLabel:'성별',male:'남성',female:'여성',birthLabel:'출생년도',birthPH:'1998',countryLabel:'국가',kr:'대한민국',jp:'일본',nextProfile:'다음: 내 프로필',backLogin:'로그인으로 돌아가기',
-        profileTitle:'내 프로필',detailHelp:'<b>자세히 입력할수록 매칭될 확률이 높습니다.</b>',profilePrivacy:'지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.',avatarHelp:'정면 증명사진 권장. 데모에서는 로컬 파일만 미리보기.',realnameLabel:'이름(실명)',realnamePH:'홍길동',photoLabel:'사진 업로드',ageLabel:'나이',jobLabel:'직업',jobPH:'직업',incomeLabel:'연봉(만원)',incomePH:'예: 4200',heightLabel:'키(cm)',heightPH:'예: 175',bodyLabel:'체형',slender:'슬렌더',average:'보통',chubby:'살집 있음',mbtiLabel:'MBTI',religionLabel:'종교',noReligion:'무교',christian:'기독교',catholic:'천주교',buddhist:'불교',etc:'기타',eduLabel:'학력',highschool:'고졸',college:'전문대졸',university:'대졸',graduate:'대학원 이상',smokeLabel:'흡연',smokeNo:'비흡연',smokeSometimes:'가끔',smokeYes:'흡연',drinkLabel:'음주',drinkNo:'비음주',drinkSometimes:'가끔',drinkOften:'자주',childLabel:'자녀 계획',childYes:'원함',childMaybe:'아직 미정',childNo:'원하지 않음',hobbyLabel:'취미(자유)',hobbyPH:'등산, 카페, 게임…',bioLabel:'한마디 소개',bioPH:'본인을 한마디로…',save:'저장',matrixTitle:'성격 매트릭스(카테고리별 최대 3개)',clearSelection:'선택 초기화',nextPrefs:'다음: 이상형 프로필',
+        profileTitle:'내 프로필 입력/편집',detailHelp:'<b>자세히 입력할수록 매칭될 확률이 높습니다.</b>',profilePrivacy:'지금 입력하고 있는 정보들은 매칭에만 활용하며 상대는 기본 정보만 열람할 수 있습니다. 서로의 정보에 대해서는 매칭 이후 자유롭게 대화를 나눌 수 있습니다. 이용자의 정보는 개인정보보호법에 의해 보호됩니다.',avatarHelp:'정면 증명사진 권장. 데모에서는 로컬 파일만 미리보기.',realnameLabel:'이름(실명)',realnamePH:'홍길동',photoLabel:'사진 업로드',ageLabel:'나이',jobLabel:'직업',jobPH:'직업',incomeLabel:'연봉(만원)',incomePH:'예: 4200',heightLabel:'키(cm)',heightPH:'예: 175',bodyLabel:'체형',slender:'슬렌더',average:'보통',chubby:'살집 있음',mbtiLabel:'MBTI',religionLabel:'종교',noReligion:'무교',christian:'기독교',catholic:'천주교',buddhist:'불교',etc:'기타',eduLabel:'학력',highschool:'고졸',college:'전문대졸',university:'대졸',graduate:'대학원 이상',smokeLabel:'흡연',smokeNo:'비흡연',smokeSometimes:'가끔',smokeYes:'흡연',drinkLabel:'음주',drinkNo:'비음주',drinkSometimes:'가끔',drinkOften:'자주',childLabel:'자녀 계획',childYes:'원함',childMaybe:'아직 미정',childNo:'원하지 않음',hobbyLabel:'취미(자유)',hobbyPH:'등산, 카페, 게임…',bioLabel:'한마디 소개',bioPH:'본인을 한마디로…',save:'저장',matrixTitle:'성격 매트릭스(카테고리별 최대 3개)',clearSelection:'선택 초기화',nextPrefs:'다음: 이상형 프로필',
         prefsTitle:'이상형 프로필',prefAgeLabel:'나이 선호',sameAge:'동갑',younger:'연하',older:'연상',minPH:'최소',maxPH:'최대',incomeMin:'연봉 최소(만원)',heightRange:'키 범위(cm)',any:'무관',prefHobbyLabel:'취미(희망)',prefHobbyPH:'상대 취미 희망',prefMatrixTitle:'성격 선호(카테고리별 3개)',dealbreaker:'선택 조건을 필수(Dealbreaker)로 적용',
         matchTitle:'5. 매칭',matchHelp:'버튼을 누르면 AI 점수(모의)로 상위 후보를 고르고, 매니저 최종 선택을 시뮬레이션합니다.',matchRequest:'매칭 신청',
         chatTitle:'6. 대화 + 자동 번역(모의)',chatHelp:'실서비스에서는 번역 API(Google/DeepL 등) 연동. 데모는 언어 감지/번역을 <b>흉내</b>냅니다.',chatPlaceholder:'메시지를 입력…',send:'보내기',enterSend:'엔터로 전송',meetingTitle:'7. 만남 신청',meetingHelp:'양측이 모두 동의하면 오프라인/온라인(ZOOM) 중 선택하여 스케줄 조율.',meetOffline:'오프라인 만남 신청',meetOnline:'ZOOM 만남 신청',
@@ -588,7 +592,7 @@
       },
       ja:{
         badgeLoggedOut:'ログアウト状態',badgeUnverified:'認証必要',badgeVerified:'認証済み',
-        navHome:'ホーム',navLogin:'ログイン',navProfile:'プロフィール',navMatch:'マッチング',navChat:'チャット',navLogout:'ログアウト',
+        navHome:'ホーム',navLogin:'ログイン',navProfile:'マイプロフィール',navMatch:'マッチング',navChat:'チャット',navLogout:'ログアウト',
         heroTitle:'手軽に始める <b>真剣な出会い</b>',heroSub:'AIによる一次スコア + マネージャー最終マッチング。<b>10分以内にマッチング</b>を約束する日韓結婚・交際サービス。',start:'今すぐ始める',taglineTitle:'花嫁候補があなたを待っています。',taglineDesc:'文化交流の活発化や航空便の発達、K-POPやアニメの人気などにより、日韓の結婚成立率は急速に高まっています。',profileCtaMsg:'まずプロフィールを入力してください',profileCtaBtn:'プロフィール入力',
         featuresTitle:'AiAiの強み',feat1Title:'10分以内マッチング',feat1Desc:'AIスコアリング後にマネージャーが最終選択',
         feat2Title:'自動翻訳チャット',feat2Desc:'韓⇄日リアルタイム会話で<br>相手の好意を先に確かめましょう',
@@ -612,7 +616,7 @@
         footHome:'ホーム',footStart:'開始する',
         loginTitle:'ログイン',emailLabel:'メール',pwLabel:'パスワード',loginBtn:'ログイン',signupLink:'会員登録',
         signupTitle:'基本情報入力',signupHelp:'登録→基本情報→プロフィール→理想プロフィールの順に進みます。<b>詳しく入力するほどマッチング率が上がります。</b>',nickLabel:'ニックネーム',nickPH:'ニックネーム',emailPH:'you@example.com',pwPH:'8文字以上',tosLabel:'利用規約',tosAgree:'利用規約に同意します',signupBtn:'アカウント作成',verifyTitle:'本人確認(デモ)',verifyMethod:'連絡手段',verifySMS:'携帯電話(SMS)',verifyEmail:'メール',contactLabel:'連絡先',contactPH:'010-0000-0000 / you@example.com',sendCode:'認証コード送信(デモ)',codePH:'認証コード6桁',verifyBtn:'認証確認',basicInfoTitle:'基本情報',genderLabel:'性別',male:'男性',female:'女性',birthLabel:'生年',birthPH:'1998',countryLabel:'国',kr:'韓国',jp:'日本',nextProfile:'次: プロフィール',backLogin:'ログインへ戻る',
-        profileTitle:'プロフィール',detailHelp:'<b>詳しく入力するほどマッチング率が上がります。</b>',profilePrivacy:'入力された情報はマッチングのみに利用され、相手は基本情報のみ閲覧できます。詳しい情報はマッチング後の会話で自由に共有できます。利用者の情報は個人情報保護法によって保護されます。',avatarHelp:'正面の証明写真を推奨。デモではローカルファイルのみプレビュー。',realnameLabel:'氏名',realnamePH:'山田太郎',photoLabel:'写真アップロード',ageLabel:'年齢',jobLabel:'職業',jobPH:'職業',incomeLabel:'年収(万円)',incomePH:'例: 4200',heightLabel:'身長(cm)',heightPH:'例: 175',bodyLabel:'体型',slender:'スレンダー',average:'普通',chubby:'ふくよか',mbtiLabel:'MBTI',religionLabel:'宗教',noReligion:'無宗教',christian:'キリスト教',catholic:'カトリック',buddhist:'仏教',etc:'その他',eduLabel:'学歴',highschool:'高校卒',college:'短大卒',university:'大学卒',graduate:'大学院以上',smokeLabel:'喫煙',smokeNo:'非喫煙',smokeSometimes:'時々',smokeYes:'喫煙',drinkLabel:'飲酒',drinkNo:'飲まない',drinkSometimes:'時々',drinkOften:'よく飲む',childLabel:'子ども計画',childYes:'希望する',childMaybe:'未定',childNo:'希望しない',hobbyLabel:'趣味',hobbyPH:'登山、カフェ、ゲーム…',bioLabel:'ひと言紹介',bioPH:'自己紹介を一言で…',save:'保存',matrixTitle:'性格マトリックス(各カテゴリー最大3つ)',clearSelection:'選択リセット',nextPrefs:'次: 理想プロフィール',
+        profileTitle:'プロフィール入力/編集',detailHelp:'<b>詳しく入力するほどマッチング率が上がります。</b>',profilePrivacy:'入力された情報はマッチングのみに利用され、相手は基本情報のみ閲覧できます。詳しい情報はマッチング後の会話で自由に共有できます。利用者の情報は個人情報保護法によって保護されます。',avatarHelp:'正面の証明写真を推奨。デモではローカルファイルのみプレビュー。',realnameLabel:'氏名',realnamePH:'山田太郎',photoLabel:'写真アップロード',ageLabel:'年齢',jobLabel:'職業',jobPH:'職業',incomeLabel:'年収(万円)',incomePH:'例: 4200',heightLabel:'身長(cm)',heightPH:'例: 175',bodyLabel:'体型',slender:'スレンダー',average:'普通',chubby:'ふくよか',mbtiLabel:'MBTI',religionLabel:'宗教',noReligion:'無宗教',christian:'キリスト教',catholic:'カトリック',buddhist:'仏教',etc:'その他',eduLabel:'学歴',highschool:'高校卒',college:'短大卒',university:'大学卒',graduate:'大学院以上',smokeLabel:'喫煙',smokeNo:'非喫煙',smokeSometimes:'時々',smokeYes:'喫煙',drinkLabel:'飲酒',drinkNo:'飲まない',drinkSometimes:'時々',drinkOften:'よく飲む',childLabel:'子ども計画',childYes:'希望する',childMaybe:'未定',childNo:'希望しない',hobbyLabel:'趣味',hobbyPH:'登山、カフェ、ゲーム…',bioLabel:'ひと言紹介',bioPH:'自己紹介を一言で…',save:'保存',matrixTitle:'性格マトリックス(各カテゴリー最大3つ)',clearSelection:'選択リセット',nextPrefs:'次: 理想プロフィール',
         prefsTitle:'理想プロフィール',prefAgeLabel:'年齢の希望',sameAge:'同い年',younger:'年下',older:'年上',minPH:'最小',maxPH:'最大',incomeMin:'最低年収(万円)',heightRange:'身長範囲(cm)',any:'指定なし',prefHobbyLabel:'趣味(希望)',prefHobbyPH:'相手に望む趣味',prefMatrixTitle:'性格の好み(各カテゴリー3つ)',dealbreaker:'選択条件を必須(ディールブレイカー)として適用',
         matchTitle:'5. マッチング',matchHelp:'ボタンを押すとAIスコア(デモ)で上位候補を選び、マネージャー最終選択をシミュレーションします。',matchRequest:'マッチング申請',
         chatTitle:'6. チャット + 自動翻訳(デモ)',chatHelp:'本サービスでは翻訳API(Google/DeepL等)を連携。デモでは言語検出/翻訳を< b>擬似</b>的に行います。',chatPlaceholder:'メッセージを入力…',send:'送信',enterSend:'Enterで送信',meetingTitle:'7. 出会い申請',meetingHelp:'双方が同意するとオフライン/オンライン(ZOOM)から日程調整します。',meetOffline:'オフライン出会い申請',meetOnline:'ZOOM出会い申請',
@@ -666,9 +670,16 @@
         store.set('last_email',email);
         store.set('last_pw',pw);
         try{
-          await sb.from('profiles').upsert({ user_id:data.user.id, nickname:nick, gender:g, birth_year:+b, country:c });
+          await sb.from('profiles').upsert({
+            user_id: data.user.id,
+            nickname: nick,
+            nick,
+            gender: g,
+            birth_year: +b,
+            country: c
+          });
         }catch(e){ console.error(e); }
-        store.set('my_profile',{ nickname:nick });
+        store.set('my_profile',{ nickname: nick, nick });
         store.del('verify');
         ui.badge();
         ui.refreshNav();
