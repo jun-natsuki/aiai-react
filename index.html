@@ -661,14 +661,16 @@
         const b=$('#ob_birth').value;
         const c=$('#ob_country').value;
         const vv=store.get('verify');
+        const emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if(!email||!nick||!pw||!tos){toast(i18n.t('toastRequired'));return;}
+        if(!emailRe.test(email)){toast('유효한 이메일을 입력하세요');return;}
+        if(pw.length<8||!/[0-9]/.test(pw)||!/[A-Za-z]/.test(pw)){toast('비밀번호는 8자 이상, 문자와 숫자를 포함해야 합니다');return;}
         if(!vv||!vv.ok||vv.email!==email){toast(i18n.t('toastNeedCode'));return;}
         if(!g||!b||!c){toast(i18n.t('toastBasicInfo'));return;}
         const { data, error } = await sb.auth.signUp({ email, password: pw });
         if(error){ toast(error.message); return; }
         store.set('session',email);
         store.set('last_email',email);
-        store.set('last_pw',pw);
         try{
           await sb.from('profiles').upsert({
             user_id: data.user.id,
@@ -718,7 +720,6 @@
         if(error){$('#li_msg').textContent=i18n.t('loginFail');return;}
         store.set('session',email);
         store.set('last_email',email);
-        store.set('last_pw',pw);
         await afterSignInHook(data.user);
         $('#li_msg').textContent=i18n.t('loginSuccess');
         toast(i18n.t('toastLogin'));
@@ -1165,7 +1166,12 @@
       },
       match(){
         if(!store.get('session')){toast(i18n.t('toastLoginNeeded'));return;}
-        $('#match_results').innerHTML='<p class="help">운영자가 매칭을 진행할 때까지 기다려 주세요.</p>';
+        const host=$('#match_results');
+        host.textContent='';
+        const p=document.createElement('p');
+        p.className='help';
+        p.textContent='운영자가 매칭을 진행할 때까지 기다려 주세요.';
+        host.appendChild(p);
       }
     };
 
@@ -1203,9 +1209,7 @@
       ui.homeCTA();
       afterSignInHook();
       const lastEmail=store.get('last_email','');
-      const lastPw=store.get('last_pw','');
       if(document.getElementById('li_email')) document.getElementById('li_email').value=lastEmail;
-      if(document.getElementById('li_pw')) document.getElementById('li_pw').value=lastPw;
       if(document.getElementById('su_email')) document.getElementById('su_email').value=lastEmail;
       if(sb?.auth){
         sb.auth.onAuthStateChange((_e, session)=>{
